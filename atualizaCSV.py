@@ -195,7 +195,7 @@ for label in axs[2].get_yticklabels(): #Tamanho dos rótulos
 
 # Formatação do eixo X
 axs[2].xaxis.set_major_formatter(mdates.DateFormatter('%H:%M', tz=brasilia_tz))
-axs[2].xaxis.set_major_locator(mdates.HourLocator(interval=2))
+#axs[2].xaxis.set_major_locator(mdates.HourLocator(interval=2))
 for label in axs[2].get_xticklabels():
     label.set_fontsize(14)
 plt.xlabel("Hora local",fontsize=14)
