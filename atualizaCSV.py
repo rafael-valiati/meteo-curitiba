@@ -8,7 +8,7 @@ import requests
 import pytz
 import numpy as np
 import os
-#Teste
+
 # Fuso horário de Brasília
 brasilia_tz = pytz.timezone("America/Sao_Paulo")
 
@@ -17,28 +17,25 @@ def get_weather_data():
     WU_API_KEY = "53f353c1e4cd4445b353c1e4cdc445a9" # JAMAIS COMPARTILHAR ESSA API KEY
     STATION_ID = "ICURITIB28"
     url = f"https://api.weather.com/v2/pws/observations/current?stationId={STATION_ID}&format=json&units=m&numericPrecision=decimal&apiKey={WU_API_KEY}"
-    timestamp = datetime.now(pytz.utc).astimezone(brasilia_tz)
+    timestamp = datetime.now(timezone.utc).astimezone(brasilia_tz)  # Captura o timestamp em UTC e converte para HBR
     try:
-      response = requests.get(url)
-      response.raise_for_status()
-      data = response.json()
-      observation = data['observations'][0]
-      temp = observation["metric"]["temp"]
-      precip_total = observation["metric"]["precipTotal"]
-      humidity = observation["humidity"]
-      dew_point = observation["metric"]["dewpt"]
-      solar_rad = observation["solarRadiation"]
-      wind_speed = observation["metric"]["windSpeed"]
-      wind_dir = observation["winddir"]
-      wind_gust = observation["metric"]["windGust"]
-      pressure = observation["metric"]["pressure"]
-      return timestamp, temp, precip_total, humidity, dew_point, solar_rad, wind_speed, wind_dir, wind_gust, pressure
-    except requests.exceptions.RequestException as e:
-      print("Erro na requisição:", e)
-      return timestamp, None, None, None, None, None, None, None, None, None
-    except KeyError as e:
-      print("Chave não encontrada nos dados da API:", e)
-      return timestamp, None, None, None, None, None, None, None, None, None
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        observation = data['observations'][0]
+        temp = observation["metric"]["temp"]
+        precip_total = observation["metric"]["precipTotal"]
+        humidity = observation["humidity"]
+        dew_point = observation["metric"]["dewpt"]
+        solar_rad = observation["solarRadiation"]
+        wind_speed = observation["metric"]["windSpeed"]
+        wind_dir = observation["winddir"]
+        wind_gust = observation["metric"]["windGust"]
+        pressure = observation["metric"]["pressure"]
+        return timestamp, temp, precip_total, humidity, dew_point, solar_rad, wind_speed, wind_dir, wind_gust, pressure
+    except (requests.exceptions.RequestException, KeyError) as e:
+        print("Erro:", e)
+        return timestamp, None, None, None, None, None, None, None, None, None
 
 # Caminho do arquivo CSV
 csv_file = 'weather_data.csv'
@@ -127,7 +124,7 @@ temp_norm = np.clip(temp_norm, 0, 1)  # Garante que o valor esteja entre 0 e 1
 state_color = 'red' if estadoEstacao == "Offline" else 'green'
 temp_color = cmap(temp_norm)
 hum_color = cmap_hum(humidity / 100)
-pres_color = cmap_pres((pressure - 920) / 20)
+pres_color = cmap_pres((pressure - 1000) / 20)
 
 hora_atual = f"{timestamp.hour:02d}"
 minuto_atual = f"{timestamp.minute:02d}"
