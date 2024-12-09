@@ -50,9 +50,14 @@ if os.path.exists(csv_file):
 else:
     # Criar um DataFrame vazio
     df = pd.DataFrame(columns=['Timestamp', 'Temperature', 'Precip', 'Humidity', 'Dew Point', 'Radiation', 'Wind Speed', 'Wind Dir', 'Wind Gust', 'Pressure'])
+    print("Arquivo CSV não encontrado. Criando um arquivo vazio...")
+    df.to_csv(csv_file, index=False)
 
 # Obter os dados atuais
 timestamp, temp, precip_total, humidity, dew_point, solar_rad, wind_speed, wind_dir, wind_gust, pressure = get_weather_data()
+print("Dados recebidos da API:")
+print(f"Timestamp: {timestamp}, Temp: {temp}, Precip: {precip_total}, Humidity: {humidity}, Dew Point: {dew_point}, Radiation: {solar_rad}, Wind Speed: {wind_speed}, Wind Dir: {wind_dir}, Wind Gust: {wind_gust}, Pressure: {pressure}")
+print(f"Tipo de timestamp: {type(timestamp)}, Valor: {timestamp}")
 
 # Verificar se o timestamp já existe no DataFrame
 if timestamp not in df['Timestamp'].values:
@@ -79,9 +84,14 @@ if timestamp not in df['Timestamp'].values:
 
     df['Timestamp'] = pd.to_datetime(df['Timestamp'])
     df = df.drop_duplicates(subset='Timestamp', keep='last')
+
+    print("Verificando o DataFrame antes de salvar:")
+    print(df)
     
     # Salvar no arquivo CSV
+    print("Tentando salvar o arquivo CSV...")
     df.to_csv(csv_file, index=False)
+    print("Arquivo CSV salvo com sucesso!")
     #Estacao On/Off
     if temp is not None:
         estadoEstacao = 'Online'
