@@ -100,8 +100,6 @@ max_humidity = df['Humidity'].max()
 min_pressure = df['Pressure'].min()
 max_pressure = df['Pressure'].max()
 
-print(f"Número de ticks no eixo X: {len(axs[2].get_xticks())}")
-
 # Configurar subplots
 fig, axs = plt.subplots(3, 1, figsize=(10, 8), sharex=True)
 fig.suptitle("Tempo e Extremos nas últimas 24 horas")
@@ -192,6 +190,7 @@ for label in axs[2].get_xticklabels():
     label.set_fontsize(14)
 plt.xlabel("Hora local",fontsize=14)
 plt.gcf().autofmt_xdate()
+print(f"Número de ticks no eixo X: {len(axs[2].get_xticks())}")
 
 # Configurar limites para cada eixo Y em cada subplot
 axs[0].set_ylim(df['Dew Point'].min()-2, df['Temperature'].max()+2)
