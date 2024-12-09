@@ -77,6 +77,9 @@ if timestamp not in df['Timestamp'].values:
     now = datetime.now(brasilia_tz)
     df = df[df['Timestamp'] >= now - pd.Timedelta(hours=24)]
 
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+    df = df.drop_duplicates(subset='Timestamp', keep='last')
+    
     # Salvar no arquivo CSV
     df.to_csv(csv_file, index=False)
     #Estacao On/Off
@@ -96,6 +99,8 @@ min_humidity = df['Humidity'].min()
 max_humidity = df['Humidity'].max()
 min_pressure = df['Pressure'].min()
 max_pressure = df['Pressure'].max()
+
+print(f"Número de ticks no eixo X: {len(axs[2].get_xticks())}")
 
 # Configurar subplots
 fig, axs = plt.subplots(3, 1, figsize=(10, 8), sharex=True)
