@@ -82,7 +82,7 @@ if timestamp not in df['Timestamp'].values:
     now = datetime.now(brasilia_tz)
     df = df[df['Timestamp'] >= now - pd.Timedelta(hours=24)]
 
-    df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+    df['Timestamp'] = pd.to_datetime(df['Timestamp']).dt.tz_localize(None)
     df = df.drop_duplicates(subset='Timestamp', keep='last')
 
     print("Verificando o DataFrame antes de salvar:")
