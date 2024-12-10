@@ -16,7 +16,7 @@ def wrap_text(text, width=13):
     return '\n'.join(textwrap.wrap(text, width=width))
 
 # Define os parâmetros da API
-WU_API_KEY = os.getenv('WU_API_KEY')
+WU_API_KEY = "53f353c1e4cd4445b353c1e4cdc445a9" # JAMAIS COMPARTILHAR ESSA API KEY
 
 latitude = -25.45  # Latitude de Curitiba
 longitude = -49.23  # Longitude de Curitiba
