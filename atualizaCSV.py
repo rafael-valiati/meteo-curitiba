@@ -129,23 +129,23 @@ fig.text(0.5, 0.99, estadoEstacao, color=state_color, fontsize=16, ha='center')
 # Exibir a temperatura, umidade, P.O. e pressão acima dos plots
 plt.figtext(0.5, 1.15, f"Condições meteorológicas atuais em Curitiba (Parque Barigui) - Atualizado {dia_atual}/{mes_atual}/{ano_atual} às {hora_atual}:{minuto_atual}", fontsize=12, ha='center')
 
-quadrado = plt.Rectangle((0.15, 1.03), 0.22, 0.10, transform=fig.transFigure, color=temp_color, lw=0)
+quadrado = plt.Rectangle((0.15, 1.06), 0.22, 0.07, transform=fig.transFigure, color=temp_color, lw=0)
 fig.patches.append(quadrado)
 # Definir a cor do texto com base na temperatura
 text_color = 'white' if (temp >= 32 or temp < 8) else 'black'
 # Usar o texto com a cor definida
-plt.figtext(0.26, 1.05, f"Temperatura:\n {temp:.1f} °C", fontsize=18, ha='center', color=text_color)
-plt.figtext(0.26, 1.00, f"Ponto de orvalho: {dew_point:.1f} °C", fontsize=12, ha='center', color='black')
+plt.figtext(0.26, 1.08, f"Temperatura:\n {temp:.1f} °C", fontsize=18, ha='center', color=text_color)
+plt.figtext(0.26, 1.03, f"Ponto de orvalho: {dew_point:.1f} °C", fontsize=12, ha='center', color='black')
 
-quadrado = plt.Rectangle((0.39, 1.03), 0.22, 0.10, transform=fig.transFigure, color=hum_color, lw=0)
+quadrado = plt.Rectangle((0.39, 1.06), 0.22, 0.07, transform=fig.transFigure, color=hum_color, lw=0)
 fig.patches.append(quadrado)
-plt.figtext(0.50, 1.05, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color='black')
-plt.figtext(0.50, 1.00, f"Chuva acumulada: {precip_total:.1f} mm", fontsize=12, ha='center', color='black')
+plt.figtext(0.50, 1.08, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color='black')
+plt.figtext(0.50, 1.03, f"Chuva acumulada: {precip_total:.1f} mm", fontsize=12, ha='center', color='black')
 
-quadrado = plt.Rectangle((0.63, 1.03), 0.22, 0.10, transform=fig.transFigure, color=rad_color, lw=0)
+quadrado = plt.Rectangle((0.63, 1.06), 0.22, 0.07, transform=fig.transFigure, color=rad_color, lw=0)
 fig.patches.append(quadrado)
 text_color = 'white' if (solar_rad < 675) else 'black'
-plt.figtext(0.74, 1.05, f"Radiação:\n {solar_rad:.0f} W/m²", fontsize=18, ha='center', color='black')
+plt.figtext(0.74, 1.08, f"Radiação:\n {solar_rad:.0f} W/m²", fontsize=18, ha='center', color=text_color)
 
 #plt.subplots_adjust(right=0.5)
 
