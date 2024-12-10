@@ -50,11 +50,12 @@ else:
     print("Arquivo CSV não encontrado. Criando um arquivo vazio...")
     df.to_csv(csv_file, index=False)
 
+# Tornar timezone-aware com o fuso horário correto
+if df['Timestamp'].dt.tz is None:
+    df['Timestamp'] = df['Timestamp'].dt.tz_localize(brasilia_tz)
+
 # Obter os dados atuais
 timestamp, temp, precip_total, humidity, dew_point, solar_rad, wind_speed, wind_dir, wind_gust, pressure = get_weather_data()
-print("Dados recebidos da API:")
-print(f"Timestamp: {timestamp}, Temp: {temp}, Precip: {precip_total}, Humidity: {humidity}, Dew Point: {dew_point}, Radiation: {solar_rad}, Wind Speed: {wind_speed}, Wind Dir: {wind_dir}, Wind Gust: {wind_gust}, Pressure: {pressure}")
-print(f"Tipo de timestamp: {type(timestamp)}, Valor: {timestamp}")
 
 # Verificar se o timestamp já existe no DataFrame
 if timestamp not in df['Timestamp'].values:
@@ -79,15 +80,11 @@ if timestamp not in df['Timestamp'].values:
     now = datetime.now(brasilia_tz)
     df = df[df['Timestamp'] >= now - pd.Timedelta(hours=24)]
 
-    df['Timestamp'] = pd.to_datetime(df['Timestamp']).dt.tz_localize(None)
     df = df.drop_duplicates(subset='Timestamp', keep='last')
-
-    print("Verificando o DataFrame antes de salvar:")
-    print(df)
     
     # Salvar no arquivo CSV
     print("Tentando salvar o arquivo CSV...")
-    df.to_csv(csv_file, index=False)
+    df.to_csv(csv_file, index=False, date_format='%Y-%m-%d %H:%M:%S%z')
     print("Arquivo CSV salvo com sucesso!")
     #Estacao On/Off
     if temp is not None:
