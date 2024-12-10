@@ -62,6 +62,8 @@ if df['Timestamp'].dt.tz is None:
 
 # Obter os dados atuais
 timestamp, temp, precip_total, humidity, dew_point, solar_rad, uv_index, wind_speed, wind_dir, wind_gust, pressure = get_weather_data()
+# Remover fração de segundos do timestamp
+timestamp = timestamp.replace(microsecond=0)
 
 # Verificar se o timestamp já existe no DataFrame
 if timestamp not in df['Timestamp'].values:
