@@ -54,7 +54,7 @@ else:
 # Garantir que a coluna 'Timestamp' seja datetime
 if not pd.api.types.is_datetime64_any_dtype(df['Timestamp']):
     df['Timestamp'] = pd.to_datetime(df['Timestamp'], errors='coerce')
-    df = df.dropna(subset=['Timestamp'])  # Remover valores inválidos
+    #df = df.dropna(subset=['Timestamp'])  # Remover valores inválidos
 
 # Verificar se a coluna já possui timezone
 if df['Timestamp'].dt.tz is None:
