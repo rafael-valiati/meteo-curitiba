@@ -50,9 +50,14 @@ else:
     print("Arquivo CSV não encontrado. Criando um arquivo vazio...")
     df.to_csv(csv_file, index=False)
 
-# Tornar timezone-aware com o fuso horário correto
+# Garantir que a coluna 'Timestamp' seja datetime
+if not pd.api.types.is_datetime64_any_dtype(df['Timestamp']):
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'], errors='coerce')
+    df = df.dropna(subset=['Timestamp'])  # Remover valores inválidos
+
+# Verificar se a coluna já possui timezone
 if df['Timestamp'].dt.tz is None:
-    df['Timestamp'] = df['Timestamp'].dt.tz_localize(brasilia_tz)
+    df['Timestamp'] = df['Timestamp'].dt.tz_localize(brasilia_tz)  # Adicionar timezone
 
 # Obter os dados atuais
 timestamp, temp, precip_total, humidity, dew_point, solar_rad, wind_speed, wind_dir, wind_gust, pressure = get_weather_data()
