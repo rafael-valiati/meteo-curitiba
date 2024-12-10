@@ -86,8 +86,6 @@ if timestamp not in df['Timestamp'].values:
     # Filtrar para manter apenas os dados das últimas 24 horas
     now = datetime.now(brasilia_tz)
     df = df[df['Timestamp'] >= now - pd.Timedelta(hours=24)]
-
-    df = df.drop_duplicates(subset='Timestamp', keep='last')
     
     # Salvar no arquivo CSV
     print("Tentando salvar o arquivo CSV...")
