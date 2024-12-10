@@ -165,7 +165,7 @@ for label in axs[0].get_yticklabels(): #Tamanho dos rótulos
 # Chuva
 #axs[1].plot(df['Timestamp'], df['Precip'], color='indigo', label='Precipitação acumulada', marker='o')
 precip_diff = df['Precip'].diff().fillna(0)
-axs[1].bar(df['Timestamp'], precip_diff, color='skyblue', label='Taxa de precipitação')
+axs[1].bar(df['Timestamp'], precip_diff, color='skyblue', label='Taxa de precipitação', width=0.02)
 axs[1].set_ylabel("Precipitação (mm)",fontsize=14)
 axs[1].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
 #axs[1].legend(loc="best")
@@ -201,7 +201,7 @@ for label in axs[4].get_yticklabels(): #Tamanho dos rótulos
 
 # Formatação do eixo X
 axs[4].xaxis.set_major_formatter(mdates.DateFormatter('%H:%M', tz=brasilia_tz))
-#axs[4].xaxis.set_major_locator(mdates.HourLocator(interval=2))
+axs[4].xaxis.set_major_locator(mdates.HourLocator(interval=2))
 for label in axs[4].get_xticklabels():
     label.set_fontsize(14)
 plt.xlabel("Hora local",fontsize=14)
