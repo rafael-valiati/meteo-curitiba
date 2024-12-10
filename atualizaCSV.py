@@ -210,7 +210,7 @@ plt.gcf().autofmt_xdate()
 
 # Configurar limites para cada eixo Y em cada subplot
 axs[0].set_ylim(df['Dew Point'].min()-2, df['Temperature'].max()+2)
-axs[1].set_ylim(0, df['Precip'].max()+5)
+axs[1].set_ylim(0, precip_diff.max()+5)
 axs[2].set_ylim([0, 103])
 axs[3].set_ylim(0, df['Wind Gust'].max()+3)
 axs[4].set_ylim([0, 1350])
