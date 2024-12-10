@@ -105,7 +105,7 @@ else:
 
 # Configurar subplots
 fig, axs = plt.subplots(5, 1, figsize=(10, 12), sharex=True)
-fig.suptitle("Tempo e Extremos nas últimas 24 horas")
+fig.suptitle("Tempo nas últimas 24 horas")
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
@@ -163,9 +163,9 @@ for label in axs[0].get_yticklabels(): #Tamanho dos rótulos
     label.set_fontsize(14)
 
 # Chuva
-axs[1].plot(df['Timestamp'], df['Precip'], color='indigo', label='Precipitação acumulada', marker='o')
-#precip_diff = df['Precip'].diff().fillna(0)
-#axs[1].bar(df['Timestamp'], precip_diff, color='skyblue', alpha=0.6, label='Taxa de precipitação')
+#axs[1].plot(df['Timestamp'], df['Precip'], color='indigo', label='Precipitação acumulada', marker='o')
+precip_diff = df['Precip'].diff().fillna(0)
+axs[1].bar(df['Timestamp'], precip_diff, color='skyblue', label='Taxa de precipitação')
 axs[1].set_ylabel("Precipitação (mm)",fontsize=14)
 axs[1].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
 #axs[1].legend(loc="best")
