@@ -115,13 +115,13 @@ c3 = plt.cm.get_cmap('PuRd_r')(np.linspace(0, 1, 50))
 col = np.vstack((c1, c2, c3))
 cmap = plt.cm.colors.ListedColormap(col)
 cmap_hum = plt.cm.colors.ListedColormap(plt.cm.coolwarm(np.linspace(1, 0, 100)))
-cmap_rad = plt.cm.colors.ListedColormap(plt.cm.cividis(np.linspace(0, 1, 135)))
+cmap_rad = plt.cm.colors.ListedColormap(plt.cm.Blues(np.linspace(0, 1, 50)))
 temp_norm = (temp + 10) / 55  # Normaliza a temperatura dos limites [-10, 45]ºC para o intervalo [0, 1]
 temp_norm = np.clip(temp_norm, 0, 1)  # Garante que o valor esteja entre 0 e 1
 state_color = 'red' if estadoEstacao == "Offline" else 'green'
 temp_color = cmap(temp_norm)
 hum_color = cmap_hum(humidity / 100)
-rad_color = cmap_rad(solar_rad/1350)
+precip_color = cmap_rad(precip_total/50)
 
 hora_atual = f"{timestamp.hour:02d}"
 minuto_atual = f"{timestamp.minute:02d}"
@@ -143,12 +143,12 @@ plt.figtext(0.26, 1.03, f"Ponto de orvalho: {dew_point:.1f} °C", fontsize=11, h
 quadrado = plt.Rectangle((0.39, 1.06), 0.22, 0.07, transform=fig.transFigure, color=hum_color, lw=0)
 fig.patches.append(quadrado)
 plt.figtext(0.50, 1.075, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color='black')
-plt.figtext(0.50, 1.03, f"Chuva acumulada: {precip_total:.1f} mm", fontsize=11, ha='center', color='black')
+plt.figtext(0.50, 1.03, f"Radiação solar: {solar_rad:.0f} W/m²", fontsize=11, ha='center', color='black')
 
-quadrado = plt.Rectangle((0.63, 1.06), 0.22, 0.07, transform=fig.transFigure, color=rad_color, lw=0)
+quadrado = plt.Rectangle((0.63, 1.06), 0.22, 0.07, transform=fig.transFigure, color=precip_color, lw=0)
 fig.patches.append(quadrado)
-text_color = 'white' if (solar_rad < 675) else 'black'
-plt.figtext(0.74, 1.075, f"Radiação:\n {solar_rad:.0f} W/m²", fontsize=18, ha='center', color=text_color)
+text_color = 'white' if (precip_total >= 30) else 'black'
+plt.figtext(0.74, 1.075, f"Chuva acum.:\n {precip_total:.1f} mm", fontsize=18, ha='center', color=text_color)
 plt.figtext(0.74, 1.03, f"Índice UV: {uv_index:.0f}", fontsize=11, ha='center', color='black')
 
 #plt.subplots_adjust(right=0.5)
