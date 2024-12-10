@@ -14,7 +14,8 @@ brasilia_tz = pytz.timezone("America/Sao_Paulo")
 
 # Função para pegar os dados do Weather Underground
 def get_weather_data():
-    WU_API_KEY = str(os.getenv('API_KEY')) # JAMAIS COMPARTILHAR ESSA API KEY
+    WU_API_KEY = os.getenv('API_KEY') # JAMAIS COMPARTILHAR ESSA API KEY
+    print(WU_API_KEY)
     STATION_ID = "ICURITIB28"
     url = f"https://api.weather.com/v2/pws/observations/current?stationId={STATION_ID}&format=json&units=m&numericPrecision=decimal&apiKey={WU_API_KEY}"
     timestamp = datetime.now(timezone.utc).astimezone(brasilia_tz)  # Captura o timestamp em UTC e converte para HBR
