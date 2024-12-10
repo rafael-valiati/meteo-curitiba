@@ -23,9 +23,16 @@
             gap: 20px; /* Espaçamento entre as imagens */
         }
 
-        img {
-            width: 900px; /* Define a largura das imagens */
-            height: auto; /* Mantém a proporção da imagem */
+        /* Estilo individual para as imagens */
+        .imagem1 {
+            width: auto; /* Ajusta automaticamente a largura para manter a proporção */
+            height: 600px; /* Define a altura da primeira imagem */
+            display: block;
+        }
+
+        .imagem2 {
+            width: auto; /* Ajusta automaticamente a largura para manter a proporção */
+            height: 300px; /* Define a altura da segunda imagem */
             display: block;
         }
 
@@ -48,6 +55,27 @@
             text-align: left;
             padding-left: 20px;
             margin-top: 10px;
+        }
+
+        /* Posicionamento do QR code à direita */
+        .qr-code-container {
+            position: absolute;
+            right: 200px; /* Distância do lado direito */
+            top: -70px;
+            text-align: center; /* Centraliza o texto e imagem no contêiner */
+        }
+
+        /* Ajuste do tamanho do QR code */
+        .qr-code {
+            width: 130px; /* Define a largura do QR code */
+            height: auto; /* Mantém a proporção */
+            margin-bottom: 5px; /* Aproxima o h3 ao QR code */
+        }
+
+        /* Remover margens do h3 para ajustá-lo ao QR code */
+        .qr-code-container h3 {
+            margin: 0;
+            font-size: 14px; /* Ajuste opcional do tamanho da fonte */
         }
     </style>
 </head>
