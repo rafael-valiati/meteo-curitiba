@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráfico do Tempo - IFUSP</title>
+    <style>
+        /* Definir o estilo do body para centralização */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Estilo para centralizar as imagens horizontalmente */
+        .imagens-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Espaçamento entre as imagens */
+        }
+
+        img {
+            width: 900px; /* Define a largura das imagens */
+            height: auto; /* Mantém a proporção da imagem */
+            display: block;
+        }
+
+        /* Adiciona mais espaço entre as imagens e o texto */
+        .texto-final {
+            margin-top: 30px; /* Ajuste este valor conforme necessário */
+        }
+
+        /* Estilo para alinhar o primeiro h2 à esquerda */
+        .texto-final:first-of-type {
+            text-align: left;
+            width: 100%; /* Faz o elemento ocupar toda a largura disponível */
+            padding-left: 20px; /* Opcional: ajuste de espaçamento da borda esquerda */
+        }
+
+        /* Contêiner para o oferecimento */
+        .oferecimento-container {
+            position: relative;
+            width: 100%; /* Ocupa a largura total do contêiner */
+            text-align: left;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="imagens-container">
+        <img src="graph.png" alt="Gráfico do Tempo Atual" class="imagem1">
+        <img src="previsao.png" alt="Previsão do Tempo" class="imagem2">
+    </div>
+    <h2 class="texto-final">Essa estação também pode ser visualizada no <a href="https://www.wunderground.com/dashboard/pws/ICURITIB28">Weather Underground.</a></h2>
+    
+    <div class="oferecimento-container">
+        <h2>Oferecimento: Rafael Valiati, BAZ.</h2>
+        <div class="qr-code-container">
+            <img src="qrCodeEstacao.png" alt="QR Code Estação" class="qr-code">
+            <h3>Versão Mobile</h3>
+        </div>
+    </div>
+</body>
+</html>
