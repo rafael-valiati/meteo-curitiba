@@ -101,14 +101,8 @@ else:
     #Estacao On/Off
     estadoEstacao = 'Offline'
 
-# Cálculo de mínimas e máximas a partir dos dados do DataFrame
-min_temp = df['Temperature'].min()
-max_temp = df['Temperature'].max()
-min_humidity = df['Humidity'].min()
-max_humidity = df['Humidity'].max()
-
 # Configurar subplots
-fig, axs = plt.subplots(5, 1, figsize=(10, 14), sharex=True)
+fig, axs = plt.subplots(5, 1, figsize=(10, 12), sharex=True)
 fig.suptitle("Tempo e Extremos nas últimas 24 horas")
 
 # Definir o colormap baseado na temperatura
@@ -133,52 +127,45 @@ mes_atual = f"{timestamp.month}"
 ano_atual = f"{timestamp.year}"
 fig.text(0.5, 0.99, estadoEstacao, color=state_color, fontsize=16, ha='center')
 # Exibir a temperatura, umidade, P.O. e pressão acima dos plots
-plt.figtext(0.5, 1.20, f"Condições meteorológicas atuais em Curitiba (Parque Barigui) - Atualizado {dia_atual}/{mes_atual}/{ano_atual} às {hora_atual}:{minuto_atual}", fontsize=12, ha='center')
+plt.figtext(0.5, 1.15, f"Condições meteorológicas atuais em Curitiba (Parque Barigui) - Atualizado {dia_atual}/{mes_atual}/{ano_atual} às {hora_atual}:{minuto_atual}", fontsize=12, ha='center')
 
-quadrado = plt.Rectangle((0.15, 1.08), 0.22, 0.10, transform=fig.transFigure, color=temp_color, lw=0)
+quadrado = plt.Rectangle((0.15, 1.03), 0.22, 0.10, transform=fig.transFigure, color=temp_color, lw=0)
 fig.patches.append(quadrado)
 # Definir a cor do texto com base na temperatura
 text_color = 'white' if (temp >= 32 or temp < 8) else 'black'
 # Usar o texto com a cor definida
-plt.figtext(0.26, 1.10, f"Temperatura:\n {temp:.1f} °C", fontsize=18, ha='center', color=text_color)
-plt.figtext(0.26, 1.05, f"Ponto de orvalho: {dew_point:.1f} °C", fontsize=12, ha='center', color='black')
+plt.figtext(0.26, 1.05, f"Temperatura:\n {temp:.1f} °C", fontsize=18, ha='center', color=text_color)
+plt.figtext(0.26, 1.00, f"Ponto de orvalho: {dew_point:.1f} °C", fontsize=12, ha='center', color='black')
 
-quadrado = plt.Rectangle((0.39, 1.08), 0.22, 0.10, transform=fig.transFigure, color=hum_color, lw=0)
+quadrado = plt.Rectangle((0.39, 1.03), 0.22, 0.10, transform=fig.transFigure, color=hum_color, lw=0)
 fig.patches.append(quadrado)
-plt.figtext(0.50, 1.10, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color='black')
-plt.figtext(0.50, 1.05, f"Chuva acumulada: {precip_total:.1f} mm", fontsize=12, ha='center', color='black')
+plt.figtext(0.50, 1.05, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color='black')
+plt.figtext(0.50, 1.00, f"Chuva acumulada: {precip_total:.1f} mm", fontsize=12, ha='center', color='black')
 
-quadrado = plt.Rectangle((0.63, 1.08), 0.22, 0.10, transform=fig.transFigure, color=rad_color, lw=0)
+quadrado = plt.Rectangle((0.63, 1.03), 0.22, 0.10, transform=fig.transFigure, color=rad_color, lw=0)
 fig.patches.append(quadrado)
 text_color = 'white' if (solar_rad < 675) else 'black'
-plt.figtext(0.74, 1.10, f"Radiação:\n {solar_rad:.0f} W/m²", fontsize=18, ha='center', color='black')
+plt.figtext(0.74, 1.05, f"Radiação:\n {solar_rad:.0f} W/m²", fontsize=18, ha='center', color='black')
 
-plt.subplots_adjust(right=0.5)
-# Exibir mínimas e máximas diárias à direita
-plt.figtext(0.99, 0.83, "Temperatura", fontsize=16)
-plt.figtext(0.99, 0.80, f"Mínima: {min_temp:.1f} °C", fontsize=12)
-plt.figtext(0.99, 0.78, f"Máxima: {max_temp:.1f} °C", fontsize=12)
-plt.figtext(0.99, 0.54, "Umidade", fontsize=16)
-plt.figtext(0.99, 0.51, f"Mínima: {min_humidity:.0f} %", fontsize=12)
-plt.figtext(0.99, 0.49, f"Máxima: {max_humidity:.0f} %", fontsize=12)
+#plt.subplots_adjust(right=0.5)
 
 # Temperatura
 axs[0].plot(df['Timestamp'], df['Temperature'], label="Temperatura", color='red', marker='o')
 axs[0].plot(df['Timestamp'], df['Dew Point'], label="Ponto de orvalho", color="green", linestyle="--", marker='o',markersize=3)
 axs[0].set_ylabel("Temperatura (°C)",fontsize=14)
 axs[0].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x}"))
-axs[0].legend(loc="upper left")
+axs[0].legend(loc="best")
 axs[0].grid(True)
 for label in axs[0].get_yticklabels(): #Tamanho dos rótulos
     label.set_fontsize(14)
 
 # Chuva
 axs[1].plot(df['Timestamp'], df['Precip'], color='indigo', label='Precipitação acumulada', marker='o')
-precip_diff = df['Precip'].diff().fillna(0)
-axs[1].bar(df['Timestamp'], precip_diff, color='skyblue', alpha=0.6, label='Taxa de precipitação')
+#precip_diff = df['Precip'].diff().fillna(0)
+#axs[1].bar(df['Timestamp'], precip_diff, color='skyblue', alpha=0.6, label='Taxa de precipitação')
 axs[1].set_ylabel("Precipitação (mm)",fontsize=14)
 axs[1].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
-axs[1].legend(fontsize=12)
+#axs[1].legend(loc="best")
 axs[1].grid(True)
 for label in axs[1].get_yticklabels(): #Tamanho dos rótulos
     label.set_fontsize(14)
@@ -197,7 +184,7 @@ axs[3].scatter(df['Timestamp'], df['Wind Gust'], color='orange', label='Rajadas'
 axs[3].set_ylabel("Vento (km/h)",fontsize=14)
 axs[3].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
 axs[3].grid(True)
-axs[3].legend(fontsize=12)
+axs[3].legend(loc="best")
 for label in axs[3].get_yticklabels(): #Tamanho dos rótulos
     label.set_fontsize(14)
 
