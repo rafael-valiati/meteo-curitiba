@@ -28,14 +28,15 @@ def get_weather_data():
         humidity = observation["humidity"]
         dew_point = observation["metric"]["dewpt"]
         solar_rad = observation["solarRadiation"]
+        uv = observation["uv"]
         wind_speed = observation["metric"]["windSpeed"]
         wind_dir = observation["winddir"]
         wind_gust = observation["metric"]["windGust"]
         pressure = observation["metric"]["pressure"]
-        return timestamp, temp, precip_total, humidity, dew_point, solar_rad, wind_speed, wind_dir, wind_gust, pressure
+        return timestamp, temp, precip_total, humidity, dew_point, solar_rad, uv, wind_speed, wind_dir, wind_gust, pressure
     except (requests.exceptions.RequestException, KeyError) as e:
         print("Erro:", e)
-        return timestamp, None, None, None, None, None, None, None, None, None
+        return timestamp, None, None, None, None, None, None, None, None, None, None
 
 # Caminho do arquivo CSV
 csv_file = 'weather_data.csv'
@@ -46,7 +47,7 @@ if os.path.exists(csv_file):
     df = pd.read_csv(csv_file, parse_dates=['Timestamp'])
 else:
     # Criar um DataFrame vazio
-    df = pd.DataFrame(columns=['Timestamp', 'Temperature', 'Precip', 'Humidity', 'Dew Point', 'Radiation', 'Wind Speed', 'Wind Dir', 'Wind Gust', 'Pressure'])
+    df = pd.DataFrame(columns=['Timestamp', 'Temperature', 'Precip', 'Humidity', 'Dew Point', 'Radiation', 'UV Index', 'Wind Speed', 'Wind Dir', 'Wind Gust', 'Pressure'])
     print("Arquivo CSV não encontrado. Criando um arquivo vazio...")
     df.to_csv(csv_file, index=False)
 
@@ -60,7 +61,7 @@ if df['Timestamp'].dt.tz is None:
     df['Timestamp'] = df['Timestamp'].dt.tz_localize(brasilia_tz)  # Adicionar timezone
 
 # Obter os dados atuais
-timestamp, temp, precip_total, humidity, dew_point, solar_rad, wind_speed, wind_dir, wind_gust, pressure = get_weather_data()
+timestamp, temp, precip_total, humidity, dew_point, solar_rad, uv_index, wind_speed, wind_dir, wind_gust, pressure = get_weather_data()
 
 # Verificar se o timestamp já existe no DataFrame
 if timestamp not in df['Timestamp'].values:
@@ -72,6 +73,7 @@ if timestamp not in df['Timestamp'].values:
         'Humidity': [humidity],
         'Dew Point': [dew_point],
         'Radiation': [solar_rad],
+        'UV Index': [uv_index],
         'Wind Speed': [wind_speed],
         'Wind Dir': [wind_dir],
         'Wind Gust': [wind_gust],
@@ -79,7 +81,7 @@ if timestamp not in df['Timestamp'].values:
     })
 
     # Concatenar com o DataFrame existente
-    df = pd.concat([df, new_data], ignore_index=True)
+    df = pd.concat([df, new_data])
 
     # Filtrar para manter apenas os dados das últimas 24 horas
     now = datetime.now(brasilia_tz)
@@ -134,18 +136,19 @@ fig.patches.append(quadrado)
 # Definir a cor do texto com base na temperatura
 text_color = 'white' if (temp >= 32 or temp < 8) else 'black'
 # Usar o texto com a cor definida
-plt.figtext(0.26, 1.08, f"Temperatura:\n {temp:.1f} °C", fontsize=18, ha='center', color=text_color)
-plt.figtext(0.26, 1.03, f"Ponto de orvalho: {dew_point:.1f} °C", fontsize=12, ha='center', color='black')
+plt.figtext(0.26, 1.075, f"Temperatura:\n {temp:.1f} °C", fontsize=18, ha='center', color=text_color)
+plt.figtext(0.26, 1.03, f"Ponto de orvalho: {dew_point:.1f} °C", fontsize=11, ha='center', color='black')
 
 quadrado = plt.Rectangle((0.39, 1.06), 0.22, 0.07, transform=fig.transFigure, color=hum_color, lw=0)
 fig.patches.append(quadrado)
-plt.figtext(0.50, 1.08, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color='black')
-plt.figtext(0.50, 1.03, f"Chuva acumulada: {precip_total:.1f} mm", fontsize=12, ha='center', color='black')
+plt.figtext(0.50, 1.075, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color='black')
+plt.figtext(0.50, 1.03, f"Chuva acumulada: {precip_total:.1f} mm", fontsize=11, ha='center', color='black')
 
 quadrado = plt.Rectangle((0.63, 1.06), 0.22, 0.07, transform=fig.transFigure, color=rad_color, lw=0)
 fig.patches.append(quadrado)
 text_color = 'white' if (solar_rad < 675) else 'black'
-plt.figtext(0.74, 1.08, f"Radiação:\n {solar_rad:.0f} W/m²", fontsize=18, ha='center', color=text_color)
+plt.figtext(0.74, 1.075, f"Radiação:\n {solar_rad:.0f} W/m²", fontsize=18, ha='center', color=text_color)
+plt.figtext(0.74, 1.03, f"Índice UV: {uv_index:.0f}", fontsize=11, ha='center', color='black')
 
 #plt.subplots_adjust(right=0.5)
 
@@ -153,7 +156,7 @@ plt.figtext(0.74, 1.08, f"Radiação:\n {solar_rad:.0f} W/m²", fontsize=18, ha=
 axs[0].plot(df['Timestamp'], df['Temperature'], label="Temperatura", color='red', marker='o')
 axs[0].plot(df['Timestamp'], df['Dew Point'], label="Ponto de orvalho", color="green", linestyle="--", marker='o',markersize=3)
 axs[0].set_ylabel("Temperatura (°C)",fontsize=14)
-axs[0].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x}"))
+axs[0].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
 axs[0].legend(loc="best")
 axs[0].grid(True)
 for label in axs[0].get_yticklabels(): #Tamanho dos rótulos
