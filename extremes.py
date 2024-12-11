@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.ticker as mticker
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import requests
 import pytz
 import numpy as np
@@ -40,7 +40,7 @@ def get_daily_min_max():
 
 # Obter os extremos diários de ontem
 min_temp, max_temp, mean_temp, precip_total = get_daily_min_max()
-timestamp = datetime.now(timezone.utc).astimezone(brasilia_tz)
+timestamp = datetime.now(timezone.utc).astimezone(brasilia_tz) - timedelta(days=1)
 data_formatada = timestamp.strftime("%Y-%m-%d")
 
 # Caminho do arquivo CSV
