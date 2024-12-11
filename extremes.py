@@ -57,6 +57,13 @@ else:
     print("Arquivo CSV não encontrado. Criando um arquivo vazio...")
     df.to_csv(csv_file, index=False)
 
+# Obter a data atual no formato YYYY-MM
+current_month = timestamp.strftime("%Y-%m")
+
+# Filtrar os dados do DataFrame para manter apenas os registros do mesmo mês
+df['YearMonth'] = df['Date'].apply(lambda x: x.strftime("%Y-%m"))
+df = df[df['YearMonth'] == current_month]
+
 # Verificar se a data já existe no DataFrame
 if pd.to_datetime(data_formatada).date() not in df['Date'].values:
     # Criar um DataFrame com o novo dado
@@ -122,14 +129,14 @@ else:
     ax.text(0.5, 0.9, summary_text, fontsize=14, ha='center', va='center', 
             bbox=dict(facecolor='lightblue', alpha=0.5))
 
-    quadrado = plt.Rectangle((0.2, 0.24), 0.2, 0.35, transform=fig.transFigure, lw=4, edgecolor='black', facecolor='lightblue', alpha=0.5)
+    quadrado = plt.Rectangle((0.2, 0.24), 0.23, 0.28, transform=fig.transFigure, lw=1, edgecolor='black', facecolor='lightblue', alpha=0.5)
     fig.patches.append(quadrado)
-    quadrado = plt.Rectangle((0.6, 0.24), 0.2, 0.35, transform=fig.transFigure, lw=4, edgecolor='black', facecolor='lightcoral', alpha=0.5)
+    quadrado = plt.Rectangle((0.57, 0.24), 0.23, 0.28, transform=fig.transFigure, lw=1, edgecolor='black', facecolor='lightcoral', alpha=0.5)
     fig.patches.append(quadrado)
 
     ax.text(0.5, 0.68, "Resumo do mês atual até ontem", fontsize=20, ha='center', va='center')
-    ax.text(0.3, 0.58, "Mínimas", fontsize=14, ha='center', va='center')
-    ax.text(0.7, 0.58, "Máximas", fontsize=14, ha='center', va='center')
+    ax.text(0.3, 0.55, "Mínimas", fontsize=14, ha='center', va='center')
+    ax.text(0.7, 0.55, "Máximas", fontsize=14, ha='center', va='center')
 
     ax.text(0.3, 0.45, f"↑ {min_max:.1f} ºC", fontsize=10, color='red', ha='center', va='center')
     ax.text(0.7, 0.45, f"↑ {max_max:.1f} ºC", fontsize=10, color='red', ha='center', va='center')
