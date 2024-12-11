@@ -27,6 +27,7 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install numpy requests matplotlib pillow pytz
+        pip install -r requirements.txt
 
     - name: Run Script
       env:
