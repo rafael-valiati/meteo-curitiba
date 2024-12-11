@@ -122,6 +122,11 @@ else:
     ax.text(0.5, 0.9, summary_text, fontsize=14, ha='center', va='center', 
             bbox=dict(facecolor='lightblue', alpha=0.5))
 
+    quadrado = plt.Rectangle((0.2, 0.24), 0.2, 0.35, transform=fig.transFigure, lw=4, edgecolor='black', facecolor='lightblue', alpha=0.5)
+    fig.patches.append(quadrado)
+    quadrado = plt.Rectangle((0.6, 0.24), 0.2, 0.35, transform=fig.transFigure, lw=4, edgecolor='black', facecolor='lightcoral', alpha=0.5)
+    fig.patches.append(quadrado)
+
     ax.text(0.5, 0.68, "Resumo do mês atual até ontem", fontsize=20, ha='center', va='center')
     ax.text(0.3, 0.58, "Mínimas", fontsize=14, ha='center', va='center')
     ax.text(0.7, 0.58, "Máximas", fontsize=14, ha='center', va='center')
@@ -132,10 +137,6 @@ else:
     ax.text(0.7, 0.31, f"↓ {max_min:.1f} ºC", fontsize=10, color='blue', ha='center', va='center')
     ax.text(0.3, 0.38, f"{avg_min:.1f} ºC", fontsize=18, ha='center', va='center')
     ax.text(0.7, 0.38, f"{avg_max:.1f} ºC", fontsize=18, ha='center', va='center')
-    quadrado = plt.Rectangle((0.2, 0.24), 0.2, 0.35, transform=fig.transFigure, lw=0, edgecolor='black', facecolor='none')
-    fig.patches.append(quadrado)
-    quadrado = plt.Rectangle((0.6, 0.24), 0.2, 0.35, transform=fig.transFigure, lw=0, edgecolor='black', facecolor='none')
-    fig.patches.append(quadrado)
 
     ax.text(0.5, 0.12, f"Temperatura média: {media_horaria:.1f} ºC\n", fontsize=16, ha='center', va='center')
     ax.text(0.5, 0.05, f"Precipitação total: {precip_soma_mes:.1f} mm\n", fontsize=16, ha='center', va='center')
