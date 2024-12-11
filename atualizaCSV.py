@@ -157,7 +157,7 @@ plt.figtext(0.74, 1.03, f"Índice UV: {uv_index:.0f}", fontsize=11, ha='center',
 axs[0].plot(df['Timestamp'], df['Temperature'], label="Temperatura", color='red', marker='o')
 axs[0].plot(df['Timestamp'], df['Dew Point'], label="Ponto de orvalho", color="green", linestyle="--", marker='o',markersize=3)
 axs[0].set_ylabel("Temperatura (°C)",fontsize=14)
-axs[0].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
+axs[0].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.1f}"))
 axs[0].legend(loc="best")
 axs[0].grid(True)
 for label in axs[0].get_yticklabels(): #Tamanho dos rótulos
@@ -168,7 +168,7 @@ for label in axs[0].get_yticklabels(): #Tamanho dos rótulos
 precip_diff = df['Precip'].diff().fillna(0)
 axs[1].bar(df['Timestamp'], precip_diff, color='skyblue', label='Taxa de precipitação', width=0.02)
 axs[1].set_ylabel("Precipitação (mm)",fontsize=14)
-axs[1].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
+axs[1].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.1f}"))
 #axs[1].legend(loc="best")
 axs[1].grid(True)
 for label in axs[1].get_yticklabels(): #Tamanho dos rótulos
@@ -186,7 +186,7 @@ for label in axs[2].get_yticklabels(): #Tamanho dos rótulos
 axs[3].plot(df['Timestamp'], df['Wind Speed'], color='navy', label='Vento', marker='o')
 axs[3].scatter(df['Timestamp'], df['Wind Gust'], color='orange', label='Rajadas', alpha=0.7)
 axs[3].set_ylabel("Vento (km/h)",fontsize=14)
-axs[3].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
+axs[3].yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:.1f}"))
 axs[3].grid(True)
 axs[3].legend(loc="best")
 for label in axs[3].get_yticklabels(): #Tamanho dos rótulos
