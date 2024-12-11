@@ -132,9 +132,9 @@ else:
     ax.text(0.7, 0.31, f"↓ {max_min:.1f} ºC", fontsize=10, color='blue', ha='center', va='center')
     ax.text(0.3, 0.38, f"{avg_min:.1f} ºC", fontsize=18, ha='center', va='center')
     ax.text(0.7, 0.38, f"{avg_max:.1f} ºC", fontsize=18, ha='center', va='center')
-    quadrado = plt.Rectangle((0.2, 0.2), 0.2, 0.35, transform=fig.transFigure, lw=0, edgecolor='black', facecolor='none')
+    quadrado = plt.Rectangle((0.2, 0.24), 0.2, 0.35, transform=fig.transFigure, lw=0, edgecolor='black', facecolor='none')
     fig.patches.append(quadrado)
-    quadrado = plt.Rectangle((0.6, 0.2), 0.2, 0.35, transform=fig.transFigure, lw=0, edgecolor='black', facecolor='none')
+    quadrado = plt.Rectangle((0.6, 0.24), 0.2, 0.35, transform=fig.transFigure, lw=0, edgecolor='black', facecolor='none')
     fig.patches.append(quadrado)
 
     ax.text(0.5, 0.12, f"Temperatura média: {media_horaria:.1f} ºC\n", fontsize=16, ha='center', va='center')
