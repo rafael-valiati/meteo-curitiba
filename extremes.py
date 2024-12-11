@@ -78,7 +78,7 @@ else:
     print(f"Dados de {data_formatada} já existem no arquivo {csv_file}.")
 
 # Determinar a data de ontem no formato YYYY-MM-DD
-yesterday = (datetime.now(brasilia_tz) - timedelta(days=1)).strftime("%Y-%m-%d")
+yesterday = (datetime.now(brasilia_tz) - timedelta(days=1)).date()
 
 # Obter os dados do dia anterior
 daily_data = df[df['Date'] == yesterday]
@@ -98,7 +98,7 @@ else:
 
     # Texto do resumo
     summary_text = (
-        f"Resumo do dia anterior ({yesterday}):\n\n"
+        #f"Resumo do dia anterior ({yesterday}):\n\n"
         f"🌡️ Temperatura mínima: {min_temp:.1f} °C\n"
         f"🌡️ Temperatura máxima: {max_temp:.1f} °C\n"
         f"🌡️ Temperatura média: {mean_temp:.1f} °C\n"
@@ -114,6 +114,6 @@ else:
 
     # Salvar o gráfico em um arquivo
     plt.tight_layout()
-    plt.savefig('graph.png', bbox_inches='tight')
+    plt.savefig('extremes_graph.png', bbox_inches='tight')
     plt.close(fig)
 
