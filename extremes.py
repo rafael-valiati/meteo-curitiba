@@ -99,10 +99,10 @@ else:
     # Texto do resumo
     summary_text = (
         #f"Resumo do dia anterior ({yesterday}):\n\n"
-        f"🌡️ Temperatura mínima: {min_temp:.1f} °C\n"
-        f"🌡️ Temperatura máxima: {max_temp:.1f} °C\n"
-        f"🌡️ Temperatura média: {mean_temp:.1f} °C\n"
-        f"☔ Precipitação acumulada: {precip_total:.1f} mm"
+        f"Temperatura mínima: {min_temp:.1f} °C\n"
+        f"Temperatura máxima: {max_temp:.1f} °C\n"
+        #f"Temperatura média: {mean_temp:.1f} °C\n"
+        f"Precipitação acumulada: {precip_total:.1f} mm"
     )
 
     # Adicionar texto ao gráfico
