@@ -92,9 +92,22 @@ else:
     mean_temp = daily_data['AvgTemp'].iloc[0]
     precip_total = daily_data['Precip'].iloc[0]
 
+    # Dados para o mês inteiro
+    min_min = df['MinTemp'].min()
+    min_max = df['MinTemp'].max()
+    max_min = df['MaxTemp'].min()
+    max_max = df['MaxTemp'].max()
+    avg_min = df['MinTemp'].mean()
+    avg_max = df['MaxTemp'].mean()
+    media_horaria = df['AvgTemp'].mean()
+    precip_soma_mes = df['Precip'].sum()
+
     # Criar o gráfico
     fig, ax = plt.subplots(figsize=(6, 4))
     ax.axis('off')  # Ocultar os eixos
+
+    # Título
+    plt.title("Resumo meteorológico de ontem", fontsize=18, pad=20)
 
     # Texto do resumo
     summary_text = (
@@ -102,15 +115,26 @@ else:
         f"Temperatura mínima: {min_temp:.1f} °C\n"
         f"Temperatura máxima: {max_temp:.1f} °C\n"
         #f"Temperatura média: {mean_temp:.1f} °C\n"
-        f"Precipitação acumulada: {precip_total:.1f} mm"
+        f"Chuva acumulada: {precip_total:.1f} mm"
     )
 
     # Adicionar texto ao gráfico
-    ax.text(0.5, 0.5, summary_text, fontsize=14, ha='center', va='center', 
+    ax.text(0.5, 0.15, summary_text, fontsize=14, ha='center', va='center', 
             bbox=dict(facecolor='lightblue', alpha=0.5))
 
-    # Título
-    plt.title("Resumo Meteorológico de ontem", fontsize=16, pad=20)
+    ax.text(0.5, 0.5, "Resumo do mês atual até ontem", fontsize=18, ha='center', va='center')
+    ax.text(0.3, 0.55, "Temperaturas mínimas", fontsize=14, ha='center', va='center')
+    ax.text(0.7, 0.55, "Temperaturas máximas", fontsize=14, ha='center', va='center')
+
+    ax.text(0.3, 0.6, f"↑ {min_max:.1f} ºC", fontsize=10, color='red', ha='center', va='center')
+    ax.text(0.7, 0.6, f"↑ {max_max:.1f} ºC", fontsize=10, color='red', ha='center', va='center')
+    ax.text(0.3, 0.85, f"↓ {min_min:.1f} ºC", fontsize=10, color='blue', ha='center', va='center')
+    ax.text(0.7, 0.85, f"↓ {max_min:.1f} ºC", fontsize=10, color='blue', ha='center', va='center')
+    ax.text(0.3, 0.68, f"{avg_min:.1f} ºC", fontsize=14, ha='center', va='center')
+    ax.text(0.7, 0.68, f"{avg_max:.1f} ºC", fontsize=14, ha='center', va='center')
+
+    ax.text(0.5, 0.9, f"Temperatura média: {media_horaria:.1f} ºC\n", fontsize=16, ha='center', va='center')
+    ax.text(0.5, 0.95, f"Precipitação total: {precip_soma_mes:.1f} mm\n", fontsize=16, ha='center', va='center')
 
     # Salvar o gráfico em um arquivo
     plt.tight_layout()
