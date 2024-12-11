@@ -7,7 +7,6 @@ from datetime import datetime
 import requests
 import pytz
 import numpy as np
-from IPython.display import clear_output
 
 # Fuso horário de Brasília
 brasilia_tz = pytz.timezone("America/Sao_Paulo")
