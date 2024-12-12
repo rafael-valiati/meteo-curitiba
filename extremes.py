@@ -41,7 +41,7 @@ def get_daily_min_max():
 # Obter os extremos diários de ontem
 min_temp, max_temp, mean_temp, precip_total = get_daily_min_max()
 timestamp = datetime.now(timezone.utc).astimezone(brasilia_tz) - timedelta(days=1)
-data_formatada = timestamp.strftime("%Y-%m-%d")
+data_formatada = timestamp.date()  # Obter apenas a data (YYYY-MM-DD) como datetime.date
 
 # Caminho do arquivo CSV
 csv_file = 'month_data.csv'
@@ -60,12 +60,13 @@ else:
 # Obter a data atual no formato YYYY-MM
 current_month = timestamp.strftime("%Y-%m")
 
+# Obter a data atual no formato YYYY-MM
+current_month = timestamp.strftime("%Y-%m")
 # Filtrar os dados do DataFrame para manter apenas os registros do mesmo mês
-df['YearMonth'] = df['Date'].apply(lambda x: x.strftime("%Y-%m"))
-df = df[df['YearMonth'] == current_month]
+df = df[df['Date'].apply(lambda x: x.strftime("%Y-%m")) == current_month]
 
 # Verificar se a data já existe no DataFrame
-if pd.to_datetime(data_formatada).date() not in df['Date'].values:
+if data_formatada not in df['Date'].values:
     # Criar um DataFrame com o novo dado
     new_data = pd.DataFrame({
         'Date': [data_formatada],
@@ -79,6 +80,7 @@ if pd.to_datetime(data_formatada).date() not in df['Date'].values:
     df = pd.concat([df, new_data], ignore_index=True)
 
     # Salvar de volta no CSV
+    df['Date'] = pd.to_datetime(df['Date']).dt.strftime("%Y-%m-%d")  # Salvar no formato desejado
     df.to_csv(csv_file, index=False)
     print(f"Dados de {data_formatada} adicionados ao arquivo {csv_file}.")
 else:
