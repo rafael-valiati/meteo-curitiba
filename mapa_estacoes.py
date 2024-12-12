@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
 import numpy as np
 import pytz
+import json
+import geopandas as gpd
+from matplotlib.colors import ListedColormap, Normalize
+import contextily as ctx
 
 # Fuso horário de Brasília
 brasilia_tz = pytz.timezone("America/Sao_Paulo")
