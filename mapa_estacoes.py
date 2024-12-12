@@ -123,7 +123,7 @@ for idx, row in gdf.iterrows():
         elif idx in [15]:
             ax.text(row.geometry.x + 1300, row.geometry.y, f"↓ Joinville", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [16]:
-            ax.text(row.geometry.x - 2000, row.geometry.y + 1500, f"Paranaguá →", color='black', va='center', fontsize=10, weight='bold')
+            ax.text(row.geometry.x - 3000, row.geometry.y + 1500, f"Paranaguá →", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [17]:
             ax.text(row.geometry.x - 3000, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [1]:
