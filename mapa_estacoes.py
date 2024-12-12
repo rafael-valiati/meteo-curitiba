@@ -87,15 +87,17 @@ gdf = gdf.to_crs(epsg=3857)  # Convertendo para o CRS usado pelo contextily
 
 norm = Normalize(vmin=-10, vmax=45)  # Definindo os limites do colormap
 
-sc = ax.scatter(gdf.geometry.x, gdf.geometry.y, c=gdf['Temperatura'], cmap=custom_colormap, s=200, edgecolor='k', linewidth=0, norm=norm)
+sc = ax.scatter(gdf.geometry.x, gdf.geometry.y, c=gdf['Temperatura'], cmap=custom_colormap, s=500, edgecolor='k', linewidth=0, norm=norm)
 
 # Adicionando o mapa de fundo
-ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron, zoom=6)  # Changed provider
+ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron, zoom=16)  # Changed provider
 
 # Adicionando títulos e labels
 ax.set_title('Temperaturas em Curitiba e região')
-ax.set_xlabel('Longitude')
-ax.set_ylabel('Latitude')
+#ax.set_xlabel('Longitude')
+#ax.set_ylabel('Latitude')
+ax.set_xticks([])
+ax.set_yticks([])
 
 # Adicionando colorbar
 cbar = plt.colorbar(sc, ax=ax, orientation='vertical', shrink=0.9)
@@ -103,13 +105,13 @@ cbar.set_label('Temperatura (ºC)')
 cbar.set_ticks(np.arange(-10, 46, 5))  # Ajustando os ticks do colorbar
 
 # Adicionando textos ao mapa
-ax.text(gdf.total_bounds[0]+0.7*(gdf.total_bounds[2]-gdf.total_bounds[0]), gdf.total_bounds[1]+0.15*(gdf.total_bounds[3]-gdf.total_bounds[1]), f'{hora}', weight='bold', fontsize=10)
+ax.text(gdf.total_bounds[0]+0.8*(gdf.total_bounds[2]-gdf.total_bounds[0]), gdf.total_bounds[1]+0.15*(gdf.total_bounds[3]-gdf.total_bounds[1]), f'{hora}', weight='bold', fontsize=10)
 for idx, row in gdf.iterrows():
     if not np.isnan(row['Temperatura']):
       if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
-        ax.text(row.geometry.x - 1000, row.geometry.y - 8000, f'{row["Temperatura"]:.0f}', color='white', ha='center', fontsize=6, weight='bold')
+        ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=8, weight='bold')
       else:
-        ax.text(row.geometry.x - 1000, row.geometry.y - 8000, f'{row["Temperatura"]:.0f}', color='black', ha='center', fontsize=6, weight='bold')
+        ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='black', ha='center', va='center', fontsize=8, weight='bold')
 
 # Salvar o gráfico em um arquivo
 plt.tight_layout()
