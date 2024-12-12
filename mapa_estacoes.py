@@ -97,7 +97,7 @@ gdf = gdf.to_crs(epsg=3857)  # Convertendo para o CRS usado pelo contextily
 
 norm = Normalize(vmin=-10, vmax=45)  # Definindo os limites do colormap
 
-sc = ax.scatter(gdf.geometry.x, gdf.geometry.y, c=gdf['Temperatura'], cmap=custom_colormap, s=500, edgecolor='k', linewidth=0, norm=norm)
+sc = ax.scatter(gdf.geometry.x, gdf.geometry.y, c=gdf['Temperatura'], cmap=custom_colormap, s=700, edgecolor='k', linewidth=0, norm=norm)
 
 # Adicionando o mapa de fundo
 ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron, zoom=12)  # Changed provider
@@ -115,24 +115,25 @@ ax.set_yticks([])
 #cbar.set_ticks(np.arange(-10, 46, 5))  # Ajustando os ticks do colorbar
 
 # Adicionando textos ao mapa
+plt.figtext(0.5, 0.00, f"Atualizado a cada 1 hora", fontsize=10, ha='center')
 for idx, row in gdf.iterrows():
     if not np.isnan(row['Temperatura']):
         if idx in [14]:
-            ax.text(row.geometry.x - 2000, row.geometry.y + 1500, f"← Ponta Grossa", color='black', va='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x - 2000, row.geometry.y + 1500, f"← Ponta Grossa", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [15]:
-            ax.text(row.geometry.x + 1300, row.geometry.y, f"↓ Joinville", color='black', va='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x + 1300, row.geometry.y, f"↓ Joinville", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [16]:
-            ax.text(row.geometry.x - 2000, row.geometry.y + 1500, f"Paranaguá →", color='black', va='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x - 2000, row.geometry.y + 1500, f"Paranaguá →", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [17]:
-            ax.text(row.geometry.x - 3000, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x - 3000, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [1]:
-            ax.text(row.geometry.x, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [0]:
-            ax.text(row.geometry.x, row.geometry.y + 1500, f"Barigui", color='black', va='center', ha='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y + 1500, f"Barigui", color='black', va='center', ha='center', fontsize=10, weight='bold')
         if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
-            ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=10, weight='bold')
         else:
-            ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='black', ha='center', va='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='black', ha='center', va='center', fontsize=10, weight='bold')
 
 # Salvar o gráfico em um arquivo
 plt.tight_layout()
