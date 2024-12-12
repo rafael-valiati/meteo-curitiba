@@ -26,7 +26,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        pip install numpy requests matplotlib pillow pytz geopandas json contextily
+        pip install numpy requests matplotlib pillow pytz geopandas contextily
         pip install -r requirements.txt
 
     - name: Run Script
