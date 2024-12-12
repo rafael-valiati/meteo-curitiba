@@ -1,0 +1,17 @@
+Nome  Codigo
+Barigui  ICURITIB28
+INMET  ICURIT60
+Bateias  ICAMPO200
+Orleans  ICURITIB22
+SJP  ISOJOS66
+BoaVista  ICURIT12
+QBarras  IQUATROB2
+Cachoeira  ICURIT46
+Colombo  ICOLOM2
+Ganchinho  ICURIT49
+CComprido  IPRCURIT2
+Pinhais  IPINHA7
+PGrossa  IPONTA40
+Joinville  ISCJOINV2
+Paranagua  IPARAN107
+Bocaiuva  IBOCAI27
