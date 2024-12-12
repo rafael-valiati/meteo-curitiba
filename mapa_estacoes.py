@@ -127,9 +127,9 @@ for idx, row in gdf.iterrows():
         elif idx in [17]:
             ax.text(row.geometry.x, row.geometry.y - 1000, f"Bocaiúva do Sul", color='black', va='center', fontsize=8)
         if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
-        ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=8, weight='bold')
         else:
-        ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='black', ha='center', va='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='black', ha='center', va='center', fontsize=8, weight='bold')
 
 # Salvar o gráfico em um arquivo
 plt.tight_layout()
