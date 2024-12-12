@@ -103,7 +103,7 @@ sc = ax.scatter(gdf.geometry.x, gdf.geometry.y, c=gdf['Temperatura'], cmap=custo
 ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron, zoom=12)  # Changed provider
 
 # Adicionando títulos e labels
-ax.set_title('Temperaturas em Curitiba e região (ºC)')
+plt.figtext(0.5, 1.15, f"Condições meteorológicas atuais em Curitiba (Parque Barigui) - Atualizado em {hora}", fontsize=18, ha='center')
 #ax.set_xlabel('Longitude')
 #ax.set_ylabel('Latitude')
 ax.set_xticks([])
@@ -115,17 +115,16 @@ ax.set_yticks([])
 #cbar.set_ticks(np.arange(-10, 46, 5))  # Ajustando os ticks do colorbar
 
 # Adicionando textos ao mapa
-ax.text(gdf.total_bounds[0]+0.1*(gdf.total_bounds[2]-gdf.total_bounds[0]), gdf.total_bounds[1]+0.15*(gdf.total_bounds[3]-gdf.total_bounds[1]), f'{hora}', weight='bold', fontsize=10)
 for idx, row in gdf.iterrows():
     if not np.isnan(row['Temperatura']):
         if idx in [14]:
-            ax.text(row.geometry.x, row.geometry.y + 1000, f"Ponta Grossa", color='black', va='center', fontsize=8)
+            ax.text(row.geometry.x - 2000, row.geometry.y + 1500, f"← Ponta Grossa", color='black', va='center', fontsize=8, weight='bold')
         elif idx in [15]:
-            ax.text(row.geometry.x, row.geometry.y + 1000, f"Joinville", color='black', va='center', fontsize=8)
+            ax.text(row.geometry.x + 2000, row.geometry.y, f"↓ Joinville", color='black', va='center', fontsize=8, weight='bold')
         elif idx in [16]:
-            ax.text(row.geometry.x, row.geometry.y + 1000, f"Paranaguá", color='black', va='center', fontsize=8)
+            ax.text(row.geometry.x - 2000, row.geometry.y + 1500, f"Paranaguá →", color='black', va='center', fontsize=8, weight='bold')
         elif idx in [17]:
-            ax.text(row.geometry.x, row.geometry.y - 1000, f"Bocaiúva do Sul", color='black', va='center', fontsize=8)
+            ax.text(row.geometry.x - 3000, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', fontsize=8, weight='bold')
         if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
             ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=8, weight='bold')
         else:
