@@ -1,7 +1,6 @@
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
-from mpl_toolkits.basemap import Basemap
 import numpy as np
 import pytz
 import json
