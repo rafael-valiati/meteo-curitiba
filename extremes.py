@@ -80,8 +80,8 @@ if data_formatada not in df['Date'].values:
     df = pd.concat([df, new_data], ignore_index=True)
 
     # Salvar de volta no CSV
-    df['Date'] = pd.to_datetime(df['Date']).dt.strftime("%Y-%m-%d")  # Salvar no formato desejado
-    df.to_csv(csv_file, index=False)
+    #df['Date'] = pd.to_datetime(df['Date']).dt.strftime("%Y-%m-%d")  # Salvar no formato desejado
+    df.to_csv(csv_file, index=False, date_format='%Y-%m-%d')
     print(f"Dados de {data_formatada} adicionados ao arquivo {csv_file}.")
 else:
     print(f"Dados de {data_formatada} já existem no arquivo {csv_file}.")
