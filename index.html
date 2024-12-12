@@ -19,8 +19,22 @@
         /* Estilo para centralizar as imagens horizontalmente */
         .imagens-container {
             display: flex;
-            justify-content: center;
-            gap: 20px; /* Espaçamento entre as imagens */
+            justify-content: center; /* Centraliza o conteúdo horizontalmente */
+            gap: 20px; /* Espaçamento horizontal entre os subcontêineres */
+        }
+        
+        .imagens-vertical {
+            display: flex;
+            flex-direction: column; /* Empilha imagens 3 e 4 verticalmente */
+            align-items: center; /* Centraliza as imagens horizontalmente */
+            gap: 20px; /* Espaçamento vertical entre as imagens */
+        }
+        
+        .imagens-horizontal {
+            display: flex;
+            flex-direction: row; /* Imagens 1 e 2 lado a lado */
+            align-items: center; /* Alinha verticalmente as imagens */
+            gap: 20px; /* Espaçamento horizontal entre as imagens */
         }
 
         /* Estilo individual para as imagens */
@@ -40,6 +54,13 @@
             width: auto; /* Ajusta automaticamente a largura para manter a proporção */
             height: 250px; /* Define a altura da segunda imagem */
             display: block;
+        }
+
+        .imagem4 {
+            width: auto; /* Ajusta automaticamente a largura para manter a proporção */
+            height: 400px; /* Ajuste a altura conforme necessário */
+            display: block;
+            margin-top: 20px; /* Espaçamento acima, separando da imagem 3 */
         }
 
         /* Adiciona mais espaço entre as imagens e o texto */
@@ -88,9 +109,16 @@
 </head>
 <body>
     <div class="imagens-container">
-        <img src="extremes_graph.png" alt="Extremos recentes" class="imagem3">
-        <img src="graph.png" alt="Gráfico do Tempo Atual" class="imagem1">
-        <img src="previsao.png" alt="Previsão do Tempo" class="imagem2">
+        <!-- Subcontêiner para imagens 3 e 4 -->
+        <div class="imagens-vertical">
+            <img src="extremes_graph.png" alt="Extremos recentes" class="imagem3">
+            <img src="mapa.png" alt="Mapa de estações" class="imagem4">
+        </div>
+        <!-- Subcontêiner para imagens 1 e 2 -->
+        <div class="imagens-horizontal">
+            <img src="graph.png" alt="Gráfico do Tempo Atual" class="imagem1">
+            <img src="previsao.png" alt="Previsão do Tempo" class="imagem2">
+        </div>
     </div>
     <h2 class="texto-final">Essa estação também pode ser visualizada no <a href="https://www.wunderground.com/dashboard/pws/ICURITIB28">Weather Underground.</a></h2>
     
