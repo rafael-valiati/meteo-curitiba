@@ -55,11 +55,10 @@ hora = datetime.now(brasilia_tz).strftime("%d/%b/%Y %H:%M")
 # Coletar dados para todas as estações
 for station in stations:
     temp, lat, lon = get_station_temperature(station)
-    if temp is not None:
-        estacoes.append(station)
-        temperatures.append(temp)
-        latitudes.append(lat)
-        longitudes.append(lon)
+    estacoes.append(station)
+    temperatures.append(temp if temp is not None else np.nan)  # Aceitar np.nan
+    latitudes.append(lat)
+    longitudes.append(lon)
 
 # Criar o DataFrame
 dados = pd.DataFrame({
