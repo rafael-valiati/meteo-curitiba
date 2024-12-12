@@ -70,6 +70,16 @@ dados = pd.DataFrame({
     'Hora': [hora] * len(estacoes)  # Adiciona a mesma hora para todas as linhas
 })
 
+# Corrige a posição das últimas 4 estações
+dados['Latitude'][14] = -25.3
+dados['Longitude'][14] = -49.49
+dados['Latitude'][15] = -25.58
+dados['Longitude'][15] = -49.12
+dados['Latitude'][16] = -25.51
+dados['Longitude'][16] = -49.10
+dados['Latitude'][17] = -25.27
+dados['Longitude'][17] = -49.14
+
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
 c2 = plt.cm.turbo(np.linspace(0, 1, 176))
@@ -81,7 +91,7 @@ custom_colormap = ListedColormap(col)
 ctx.providers.keys()  # This will trigger the initialization
 
 # Criação do gráfico usando matplotlib diretamente
-fig, ax = plt.subplots(1, 1, figsize=(13, 10))
+fig, ax = plt.subplots(1, 1, figsize=(10, 7))
 gdf = gpd.GeoDataFrame(dados, geometry=gpd.points_from_xy(dados.Longitude, dados.Latitude), crs="EPSG:4326")
 gdf = gdf.to_crs(epsg=3857)  # Convertendo para o CRS usado pelo contextily
 
@@ -90,27 +100,35 @@ norm = Normalize(vmin=-10, vmax=45)  # Definindo os limites do colormap
 sc = ax.scatter(gdf.geometry.x, gdf.geometry.y, c=gdf['Temperatura'], cmap=custom_colormap, s=500, edgecolor='k', linewidth=0, norm=norm)
 
 # Adicionando o mapa de fundo
-ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron, zoom=11)  # Changed provider
+ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron, zoom=12)  # Changed provider
 
 # Adicionando títulos e labels
-ax.set_title('Temperaturas em Curitiba e região')
+ax.set_title('Temperaturas em Curitiba e região (ºC)')
 #ax.set_xlabel('Longitude')
 #ax.set_ylabel('Latitude')
 ax.set_xticks([])
 ax.set_yticks([])
 
 # Adicionando colorbar
-cbar = plt.colorbar(sc, ax=ax, orientation='vertical', shrink=0.9)
-cbar.set_label('Temperatura (ºC)')
-cbar.set_ticks(np.arange(-10, 46, 5))  # Ajustando os ticks do colorbar
+#cbar = plt.colorbar(sc, ax=ax, orientation='vertical', shrink=0.9)
+#cbar.set_label('Temperatura (ºC)')
+#cbar.set_ticks(np.arange(-10, 46, 5))  # Ajustando os ticks do colorbar
 
 # Adicionando textos ao mapa
-ax.text(gdf.total_bounds[0]+0.8*(gdf.total_bounds[2]-gdf.total_bounds[0]), gdf.total_bounds[1]+0.15*(gdf.total_bounds[3]-gdf.total_bounds[1]), f'{hora}', weight='bold', fontsize=10)
+ax.text(gdf.total_bounds[0]+0.1*(gdf.total_bounds[2]-gdf.total_bounds[0]), gdf.total_bounds[1]+0.15*(gdf.total_bounds[3]-gdf.total_bounds[1]), f'{hora}', weight='bold', fontsize=10)
 for idx, row in gdf.iterrows():
     if not np.isnan(row['Temperatura']):
-      if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
+        if idx in [14]:
+            ax.text(row.geometry.x, row.geometry.y + 1000, f"Ponta Grossa", color='black', va='center', fontsize=8)
+        elif idx in [15]:
+            ax.text(row.geometry.x, row.geometry.y + 1000, f"Joinville", color='black', va='center', fontsize=8)
+        elif idx in [16]:
+            ax.text(row.geometry.x, row.geometry.y + 1000, f"Paranaguá", color='black', va='center', fontsize=8)
+        elif idx in [17]:
+            ax.text(row.geometry.x, row.geometry.y - 1000, f"Bocaiúva do Sul", color='black', va='center', fontsize=8)
+        if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
         ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=8, weight='bold')
-      else:
+        else:
         ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='black', ha='center', va='center', fontsize=8, weight='bold')
 
 # Salvar o gráfico em um arquivo
