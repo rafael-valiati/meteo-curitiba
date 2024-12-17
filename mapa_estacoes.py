@@ -69,15 +69,9 @@ dados = pd.DataFrame({
     'Hora': [hora] * len(estacoes)  # Adiciona a mesma hora para todas as linhas
 })
 
-# Corrige a posição das últimas 4 estações
-dados['Latitude'][14] = -25.3
-dados['Longitude'][14] = -49.49
-dados['Latitude'][15] = -25.58
-dados['Longitude'][15] = -49.17
-dados['Latitude'][16] = -25.51
-dados['Longitude'][16] = -49.10
-dados['Latitude'][17] = -25.27
-dados['Longitude'][17] = -49.14
+# Corrige a posição de Bocaiúva
+dados['Latitude'][14] = -25.27
+dados['Longitude'][14] = -49.14
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
@@ -117,16 +111,10 @@ ax.set_yticks([])
 plt.figtext(0.5, 0.00, f"Atualizado a cada 1 hora", fontsize=10, ha='center')
 for idx, row in gdf.iterrows():
     if not np.isnan(row['Temperatura']):
-        if idx in [14]:
-            ax.text(row.geometry.x - 2000, row.geometry.y + 1500, f"← Ponta Grossa", color='black', va='center', fontsize=10, weight='bold')
-        elif idx in [15]:
-            ax.text(row.geometry.x + 1300, row.geometry.y, f"↓ Joinville", color='black', va='center', fontsize=10, weight='bold')
-        elif idx in [16]:
-            ax.text(row.geometry.x - 3000, row.geometry.y + 1500, f"Paranaguá →", color='black', va='center', fontsize=10, weight='bold')
-        elif idx in [17]:
+        elif idx in [14]:
             ax.text(row.geometry.x - 3000, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [1]:
-            ax.text(row.geometry.x, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=10, weight='bold')
+            ax.text(row.geometry.x + 500, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [0]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Barigui", color='black', va='center', ha='center', fontsize=10, weight='bold')
         if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
