@@ -114,7 +114,7 @@ for idx, row in gdf.iterrows():
         if idx in [14]:
             ax.text(row.geometry.x - 3000, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', fontsize=10, weight='bold')
         elif idx in [1]:
-            ax.text(row.geometry.x + 500, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=10, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [0]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Barigui", color='black', va='center', ha='center', fontsize=10, weight='bold')
         if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
