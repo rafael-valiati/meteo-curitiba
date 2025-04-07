@@ -73,6 +73,14 @@ dados = pd.DataFrame({
 dados['Latitude'][14] = -25.27
 dados['Longitude'][14] = -49.14
 
+# Corrige a posição de Balsa Nova
+dados['Latitude'][20] = -25.49
+dados['Longitude'][20] = -49.49
+
+# Corrige a posição de Lapa
+dados['Latitude'][21] = -25.57
+dados['Longitude'][21] = -49.49
+
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
 c2 = plt.cm.turbo(np.linspace(0, 1, 176))
@@ -113,6 +121,10 @@ for idx, row in gdf.iterrows():
     if not np.isnan(row['Temperatura']):
         if idx in [14]:
             ax.text(row.geometry.x - 3000, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', fontsize=10, weight='bold')
+        elif idx in [20]:
+            ax.text(row.geometry.x + 1000, row.geometry.y + 1500, f"← Balsa Nova", color='black', va='center', ha='center', fontsize=10, weight='bold')
+        elif idx in [21]:
+            ax.text(row.geometry.x + 1000, row.geometry.y + 1500, f"↓ Lapa", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [1]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [0]:
