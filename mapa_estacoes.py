@@ -82,8 +82,8 @@ dados['Latitude'][19] = -25.57
 dados['Longitude'][19] = -49.49
 
 # Corrige a posição de Matinhos
-dados['Latitude'][19] = -25.52
-dados['Longitude'][19] = -49.14
+dados['Latitude'][20] = -25.52
+dados['Longitude'][20] = -49.14
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
