@@ -81,6 +81,10 @@ dados['Longitude'][18] = -49.49
 dados['Latitude'][19] = -25.57
 dados['Longitude'][19] = -49.49
 
+# Corrige a posição de Matinhos
+dados['Latitude'][19] = -25.52
+dados['Longitude'][19] = -49.14
+
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
 c2 = plt.cm.turbo(np.linspace(0, 1, 176))
@@ -125,6 +129,8 @@ for idx, row in gdf.iterrows():
             ax.text(row.geometry.x + 1000, row.geometry.y + 1500, f"← Balsa Nova", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [19]:
             ax.text(row.geometry.x + 1000, row.geometry.y + 1500, f"↓ Lapa", color='black', va='center', ha='center', fontsize=10, weight='bold')
+        elif idx in [20]:
+            ax.text(row.geometry.x - 1000, row.geometry.y - 1500, f"Matinhos →", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [1]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [0]:
