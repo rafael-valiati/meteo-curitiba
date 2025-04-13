@@ -51,6 +51,7 @@ longitudes = []
 estacoes = []
 
 hora = datetime.now(brasilia_tz).strftime("%d/%b/%Y %H:%M")
+hora_num = datetime.now(brasilia_tz).hour
 
 # Coletar dados para todas as estações
 for station in stations:
@@ -84,6 +85,10 @@ dados['Longitude'][19] = -49.49
 # Corrige a posição de Matinhos
 dados['Latitude'][20] = -25.52
 dados['Longitude'][20] = -49.14
+
+# Plota estações suspeitas só se for à noite.
+if 5 <= hora_num <= 19:
+    dados.loc[dados.index[22:], 'Temperatura'] = np.nan
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
