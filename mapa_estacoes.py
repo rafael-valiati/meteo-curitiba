@@ -72,7 +72,7 @@ dados = pd.DataFrame({
 
 # Corrige a posição de Bocaiúva
 dados['Latitude'][13] = -25.27
-dados['Longitude'][13] = -49.18
+dados['Longitude'][13] = -49.14
 
 # Corrige a posição de Balsa Nova
 dados['Latitude'][18] = -25.49
@@ -84,7 +84,7 @@ dados['Longitude'][19] = -49.49
 
 # Corrige a posição de Matinhos
 dados['Latitude'][20] = -25.52
-dados['Longitude'][20] = -49.14
+dados['Longitude'][20] = -49.12
 
 # Plota estações suspeitas só se for à noite.
 if 5 <= hora_num <= 19:
