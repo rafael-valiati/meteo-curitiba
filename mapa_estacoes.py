@@ -70,16 +70,16 @@ dados = pd.DataFrame({
 })
 
 # Corrige a posição de Bocaiúva
-dados['Latitude'][14] = -25.27
-dados['Longitude'][14] = -49.14
+dados['Latitude'][13] = -25.27
+dados['Longitude'][13] = -49.18
 
 # Corrige a posição de Balsa Nova
-dados['Latitude'][19] = -25.49
-dados['Longitude'][19] = -49.49
+dados['Latitude'][18] = -25.49
+dados['Longitude'][18] = -49.49
 
 # Corrige a posição de Lapa
-dados['Latitude'][20] = -25.57
-dados['Longitude'][20] = -49.49
+dados['Latitude'][19] = -25.57
+dados['Longitude'][19] = -49.49
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
@@ -119,11 +119,11 @@ ax.set_yticks([])
 plt.figtext(0.5, 0.00, f"Atualizado a cada 1 hora", fontsize=10, ha='center')
 for idx, row in gdf.iterrows():
     if not np.isnan(row['Temperatura']):
-        if idx in [14]:
+        if idx in [13]:
             ax.text(row.geometry.x - 3000, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', fontsize=10, weight='bold')
-        elif idx in [19]:
+        elif idx in [18]:
             ax.text(row.geometry.x + 1000, row.geometry.y + 1500, f"← Balsa Nova", color='black', va='center', ha='center', fontsize=10, weight='bold')
-        elif idx in [20]:
+        elif idx in [19]:
             ax.text(row.geometry.x + 1000, row.geometry.y + 1500, f"↓ Lapa", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [1]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=10, weight='bold')
