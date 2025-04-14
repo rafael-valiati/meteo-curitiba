@@ -176,6 +176,8 @@ for idx, row in gdf.iterrows():
             ax.text(row.geometry.x, row.geometry.y + 1500, f"S Lourenço", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [26]:
             ax.text(row.geometry.x, row.geometry.y - 1500, f"Água Verde", color='black', va='center', ha='center', fontsize=8, weight='bold')
+        elif idx in [27]:
+            ax.text(row.geometry.x, row.geometry.y + 1500, f"Uberaba", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [1]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"INMET", color='black', va='center', ha='center', fontsize=12, weight='bold')
         elif idx in [0]:
