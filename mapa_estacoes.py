@@ -72,7 +72,7 @@ dados = pd.DataFrame({
 
 # Corrige a posição de Bocaiúva
 dados['Latitude'][10] = -25.27
-dados['Longitude'][13] = -49.14
+dados['Longitude'][10] = -49.14
 
 # Corrige a posição de Balsa Nova
 dados['Latitude'][15] = -25.49
