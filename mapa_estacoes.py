@@ -61,7 +61,7 @@ if 5 <= hora_num <= 19:
         temperatures.append(temp if temp is not None else np.nan)  # Aceitar np.nan
         latitudes.append(lat)
         longitudes.append(lon)
-else
+else:
     for station in stations:
         temp, lat, lon = get_station_temperature(station)
         estacoes.append(station)
@@ -170,7 +170,7 @@ for idx, row in gdf.iterrows():
             ax.text(row.geometry.x - 1000, row.geometry.y - 1500, f"Matinhos →", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [18]:
             ax.text(row.geometry.x, row.geometry.y - 1500, f"Canguiri", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        if(len(gdf) > 19)
+        if(len(gdf) > 19):
             if idx in [19]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"S Inácio", color='black', va='center', ha='center', fontsize=8, weight='bold')
             elif idx in [20]:
