@@ -114,7 +114,7 @@ norm = Normalize(vmin=-10, vmax=45)  # Definindo os limites do colormap
 sc = ax.scatter(gdf.geometry.x, gdf.geometry.y, c=gdf['Temperatura'], cmap=custom_colormap, s=700, edgecolor='k', linewidth=0, norm=norm)
 
 # Adicionando o mapa de fundo
-ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron, zoom=12)  # Changed provider
+ctx.add_basemap(ax, source=ctx.providers.OpenStreetMap.Mapnik, zoom=12)  # Changed provider
 
 # Adicionando títulos e labels
 plt.figtext(0.5, 1.00, f"Temperaturas em Curitiba e região - Atualizado em {hora}", fontsize=18, ha='center')
