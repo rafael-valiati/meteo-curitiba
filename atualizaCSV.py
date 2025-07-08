@@ -142,7 +142,8 @@ plt.figtext(0.26, 1.03, f"Ponto de orvalho: {dew_point:.1f} °C", fontsize=11, h
 
 quadrado = plt.Rectangle((0.39, 1.06), 0.22, 0.07, transform=fig.transFigure, color=hum_color, lw=0)
 fig.patches.append(quadrado)
-plt.figtext(0.50, 1.075, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color='black')
+text_color = 'white' if (humidity >= 90) else 'black'
+plt.figtext(0.50, 1.075, f"Umidade:\n {humidity:.0f} %", fontsize=18, ha='center', color=text_color)
 plt.figtext(0.50, 1.03, f"Radiação solar: {solar_rad:.0f} W/m²", fontsize=11, ha='center', color='black')
 
 quadrado = plt.Rectangle((0.63, 1.06), 0.22, 0.07, transform=fig.transFigure, color=precip_color, lw=0)
