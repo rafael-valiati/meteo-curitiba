@@ -55,7 +55,7 @@ hora_num = datetime.now(brasilia_tz).hour
 
 # Pega dados das estações suspeitas só se for à noite.
 if 5 <= hora_num <= 19:
-    for station in stations[:21]:
+    for station in stations[:20]:
         temp, lat, lon = get_station_temperature(station)
         estacoes.append(station)
         temperatures.append(temp if temp is not None else np.nan)  # Aceitar np.nan
@@ -89,10 +89,6 @@ dados['Longitude'][15] = -49.49
 # Corrige a posição de Lapa
 dados['Latitude'][16] = -25.57
 dados['Longitude'][16] = -49.49
-
-# Corrige a posição de Vista Alegre
-dados['Latitude'][20] = -25.40
-dados['Longitude'][20] = -49.31
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
@@ -172,10 +168,13 @@ for idx, row in gdf.iterrows():
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Canguiri", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [19]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Q. Barras", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [20]:
-            ax.text(row.geometry.x, row.geometry.y + 1500, f"Vista Alegre", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        if(len(gdf) > 21):
-            if idx in [21]:
+        if(len(gdf) > 20):
+            # Corrige a posição de Vista Alegre
+            dados['Latitude'][20] = -25.40
+            dados['Longitude'][20] = -49.31
+            if idx in [20]:
+                ax.text(row.geometry.x, row.geometry.y + 1500, f"Vista Alegre", color='black', va='center', ha='center', fontsize=8, weight='bold')
+            elif idx in [21]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"S Inácio", color='black', va='center', ha='center', fontsize=8, weight='bold')
             elif idx in [22]:
                 ax.text(row.geometry.x + 500, row.geometry.y - 1500, f"Bigorrilho", color='black', va='center', ha='center', fontsize=8, weight='bold')
