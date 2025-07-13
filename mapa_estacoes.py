@@ -90,7 +90,7 @@ dados['Longitude'][15] = -49.49
 dados['Latitude'][16] = -25.57
 dados['Longitude'][16] = -49.49
 
-if(len(gdf) > 20):
+if(len(dados) > 20):
     # Corrige a posição de Vista Alegre
     dados['Latitude'][20] = -25.40
     dados['Longitude'][20] = -49.31
