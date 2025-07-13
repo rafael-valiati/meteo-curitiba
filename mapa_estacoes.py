@@ -90,6 +90,11 @@ dados['Longitude'][15] = -49.49
 dados['Latitude'][16] = -25.57
 dados['Longitude'][16] = -49.49
 
+if(len(gdf) > 20):
+    # Corrige a posição de Vista Alegre
+    dados['Latitude'][20] = -25.40
+    dados['Longitude'][20] = -49.31
+
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
 c2 = plt.cm.turbo(np.linspace(0, 1, 176))
@@ -169,9 +174,6 @@ for idx, row in gdf.iterrows():
         elif idx in [19]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Q. Barras", color='black', va='center', ha='center', fontsize=8, weight='bold')
         if(len(gdf) > 20):
-            # Corrige a posição de Vista Alegre
-            dados['Latitude'][20] = -25.40
-            dados['Longitude'][20] = -49.31
             if idx in [20]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Vista Alegre", color='black', va='center', ha='center', fontsize=8, weight='bold')
             elif idx in [21]:
