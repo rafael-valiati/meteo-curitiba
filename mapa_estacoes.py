@@ -91,7 +91,7 @@ dados['Latitude'][16] = -25.57
 dados['Longitude'][16] = -49.49
 
 # Corrige a posição de Borda do Campo
-dados['Latitude'][20] = -25.57
+dados['Latitude'][20] = -25.41
 dados['Longitude'][20] = -49.08
 
 if(len(dados) > 21):
