@@ -90,10 +90,14 @@ dados['Longitude'][15] = -49.49
 dados['Latitude'][16] = -25.57
 dados['Longitude'][16] = -49.49
 
+# Corrige a posição de Borda do Campo
+dados['Latitude'][20] = -25.57
+dados['Longitude'][20] = -49.08
+
 if(len(dados) > 21):
     # Corrige a posição de Vista Alegre
-    dados['Latitude'][20] = -25.40
-    dados['Longitude'][20] = -49.31
+    dados['Latitude'][21] = -25.40
+    dados['Longitude'][21] = -49.31
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
@@ -106,7 +110,7 @@ custom_colormap = ListedColormap(col)
 ctx.providers.keys()  # This will trigger the initialization
 
 # Criação do gráfico usando matplotlib diretamente
-fig, ax = plt.subplots(1, 1, figsize=(10, 8))
+fig, ax = plt.subplots(1, 1, figsize=(10, 7))
 gdf = gpd.GeoDataFrame(dados, geometry=gpd.points_from_xy(dados.Longitude, dados.Latitude), crs="EPSG:4326")
 gdf = gdf.to_crs(epsg=3857)  # Convertendo para o CRS usado pelo contextily
 
@@ -166,7 +170,7 @@ for idx, row in gdf.iterrows():
         elif idx in [15]:
             ax.text(row.geometry.x + 1000, row.geometry.y + 1500, f"← Balsa Nova", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [16]:
-            ax.text(row.geometry.x + 2500, row.geometry.y, f"↓ Lapa", color='black', va='center', ha='center', fontsize=10, weight='bold')
+            ax.text(row.geometry.x + 3000, row.geometry.y, f"↓ Lapa", color='black', va='center', ha='center', fontsize=10, weight='bold')
         elif idx in [17]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Piraquara", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [18]:
@@ -174,7 +178,7 @@ for idx, row in gdf.iterrows():
         elif idx in [19]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Q. Barras", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [20]:
-            ax.text(row.geometry.x, row.geometry.y - 1500, f"Borda do Campo", color='black', va='center', ha='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y - 1500, f"B. Campo →", color='black', va='center', ha='center', fontsize=8, weight='bold')
         if(len(gdf) > 21):
             if idx in [21]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Vista Alegre", color='black', va='center', ha='center', fontsize=8, weight='bold')
