@@ -202,7 +202,7 @@ for idx, row in gdf.iterrows():
                 ax.text(row.geometry.x, row.geometry.y - 1500, f"Água Verde", color='black', va='center', ha='center', fontsize=8, weight='bold')
             elif idx in [29]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Uberaba", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        if (33 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 5):
+        if (32 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 8):
             ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=10, weight='bold')
         else:
             ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='black', ha='center', va='center', fontsize=10, weight='bold')
