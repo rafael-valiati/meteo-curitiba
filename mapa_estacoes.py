@@ -80,7 +80,7 @@ dados = pd.DataFrame({
 
 # Corrige a posição de Bocaiúva
 dados['Latitude'][10] = -25.27
-dados['Longitude'][10] = -49.14
+dados['Longitude'][10] = -49.11
 
 # Corrige a posição de Balsa Nova
 dados['Latitude'][15] = -25.49
@@ -101,7 +101,7 @@ if(len(dados) > 21):
 
     # Corrige a posição de Rio Branco do Sul
     dados['Latitude'][21] = -25.27
-    dados['Longitude'][21] = -49.23
+    dados['Longitude'][21] = -49.18
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
@@ -185,7 +185,7 @@ for idx, row in gdf.iterrows():
             ax.text(row.geometry.x, row.geometry.y - 1500, f"B. Campo →", color='black', va='center', ha='center', fontsize=8, weight='bold')
         if(len(gdf) > 21):
             if idx in [21]:
-                ax.text(row.geometry.x - 1500, row.geometry.y - 1500, f"Rio Branco do Sul", color='black', va='center', ha='center', fontsize=8, weight='bold')
+                ax.text(row.geometry.x, row.geometry.y - 1500, f"↑ Rio Branco do Sul", color='black', va='center', ha='center', fontsize=8, weight='bold')
             elif idx in [22]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Jardim Veneza", color='black', va='center', ha='center', fontsize=8, weight='bold')
             elif idx in [23]:
