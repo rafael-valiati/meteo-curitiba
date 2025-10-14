@@ -96,12 +96,8 @@ dados['Longitude'][20] = -49.08
 
 if(len(dados) > 21):
     # Corrige a posição de Vista Alegre
-    dados['Latitude'][23] = -25.40
-    dados['Longitude'][23] = -49.31
-
-    # Corrige a posição de Rio Branco do Sul
-    dados['Latitude'][21] = -25.27
-    dados['Longitude'][21] = -49.18
+    dados['Latitude'][21] = -25.40
+    dados['Longitude'][21] = -49.31
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
@@ -185,22 +181,18 @@ for idx, row in gdf.iterrows():
             ax.text(row.geometry.x, row.geometry.y - 1500, f"B. Campo →", color='black', va='center', ha='center', fontsize=8, weight='bold')
         if(len(gdf) > 21):
             if idx in [21]:
-                ax.text(row.geometry.x, row.geometry.y - 1500, f"↑ Rio Branco do Sul", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [22]:
-                ax.text(row.geometry.x, row.geometry.y + 1500, f"Jardim Veneza", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [23]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Vista Alegre", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [24]:
+            elif idx in [22]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"S Inácio", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [25]:
+            elif idx in [23]:
                 ax.text(row.geometry.x + 500, row.geometry.y - 1500, f"Bigorrilho", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [26]:
+            elif idx in [24]:
                 ax.text(row.geometry.x - 1000, row.geometry.y + 1500, f"Pilarzinho", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [27]:
+            elif idx in [25]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"S Lourenço", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [28]:
+            elif idx in [26]:
                 ax.text(row.geometry.x, row.geometry.y - 1500, f"Água Verde", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [29]:
+            elif idx in [27]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Uberaba", color='black', va='center', ha='center', fontsize=8, weight='bold')
         if (32 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 8):
             ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=10, weight='bold')
