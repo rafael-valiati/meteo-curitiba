@@ -94,10 +94,10 @@ dados['Longitude'][16] = -49.49
 dados['Latitude'][20] = -25.41
 dados['Longitude'][20] = -49.08
 
-if(len(dados) > 21):
+if(len(dados) > 22):
     # Corrige a posição de Vista Alegre
-    dados['Latitude'][21] = -25.40
-    dados['Longitude'][21] = -49.31
+    dados['Latitude'][22] = -25.40
+    dados['Longitude'][22] = -49.31
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
