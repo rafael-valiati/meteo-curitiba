@@ -195,6 +195,7 @@ if temp is not None:
     # Formatação do eixo X
     axs[4].xaxis.set_major_formatter(mdates.DateFormatter('%H:%M', tz=brasilia_tz))
     axs[4].xaxis.set_major_locator(mdates.HourLocator(interval=2))
+    axs[4].set_xlim([start_time, end_time])
     for label in axs[4].get_xticklabels():
         label.set_fontsize(14)
     plt.xlabel("Hora local",fontsize=14)
@@ -230,9 +231,9 @@ else:
     cmap_hum = plt.cm.colors.ListedColormap(plt.cm.coolwarm(np.linspace(1, 0, 100)))
     cmap_rad = plt.cm.colors.ListedColormap(plt.cm.Blues(np.linspace(0, 1, 50)))
     state_color = 'red' if estadoEstacao == "Offline" else 'green'
-    temp_color = cmap(0.5)
+    temp_color = cmap_hum(0.5)
     hum_color = cmap_hum(0.5)
-    precip_color = cmap_rad(0.5)
+    precip_color = cmap_hum(0.5)
     
     hora_atual = f"{timestamp.hour:02d}"
     minuto_atual = f"{timestamp.minute:02d}"
@@ -313,6 +314,7 @@ else:
     # Formatação do eixo X
     axs[4].xaxis.set_major_formatter(mdates.DateFormatter('%H:%M', tz=brasilia_tz))
     axs[4].xaxis.set_major_locator(mdates.HourLocator(interval=2))
+    axs[4].set_xlim([start_time, end_time])
     for label in axs[4].get_xticklabels():
         label.set_fontsize(14)
     plt.xlabel("Hora local",fontsize=14)
