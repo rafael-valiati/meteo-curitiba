@@ -120,6 +120,9 @@ ax1.set_title('Previsão do tempo para os próximos dias', fontsize=16)
 ax1.grid(True, linestyle='--', alpha=0.5)
 ax1.yaxis.set_major_formatter(formatter)
 ax2.yaxis.set_major_formatter(formatter)
+ax1.tick_params(axis='x', labelsize=16)
+ax1.tick_params(axis='y', labelsize=18)
+ax2.tick_params(axis='y', labelsize=18)
 
 # Obtendo handles e labels de ambas as legendas
 handles1, labels1 = ax1.get_legend_handles_labels()
@@ -150,9 +153,9 @@ for i, (dia, cond) in enumerate(zip(dias, narrativas)):
 
     #img = mpimg.imread(icon_path)
     if len(dias) == 6:
-        ax1.figure.figimage(img, 110 + i * 120, 103, alpha=1.0, zorder=1)  # Ajuste a posição conforme necessário
+        ax1.figure.figimage(img, 110 + i * 120, 120, alpha=1.0, zorder=1)  # Ajuste a posição conforme necessário
     elif len(dias) == 5:
-        ax1.figure.figimage(img, 110 + i * 150, 103, alpha=1.0, zorder=1)  # Ajuste a posição conforme necessário
+        ax1.figure.figimage(img, 110 + i * 150, 120, alpha=1.0, zorder=1)  # Ajuste a posição conforme necessário
 
     # Texto da condição abaixo do ícone
     # Aplica a quebra de linha à narrativa, sem quebrar palavras no meio
