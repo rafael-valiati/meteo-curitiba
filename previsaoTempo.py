@@ -120,7 +120,7 @@ ax1.set_title('Previsão do tempo para os próximos dias', fontsize=16)
 ax1.grid(True, linestyle='--', alpha=0.5)
 ax1.yaxis.set_major_formatter(formatter)
 ax2.yaxis.set_major_formatter(formatter)
-ax1.tick_params(axis='x', labelsize=16)
+ax1.tick_params(axis='x', labelsize=14)
 ax1.tick_params(axis='y', labelsize=18)
 ax2.tick_params(axis='y', labelsize=18)
 
