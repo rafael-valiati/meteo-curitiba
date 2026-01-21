@@ -79,25 +79,25 @@ dados = pd.DataFrame({
 })
 
 # Corrige a posição de Bocaiúva
-dados['Latitude'][10] = -25.27
-dados['Longitude'][10] = -49.11
+dados.at[10, 'Latitude'] = -25.27
+dados.at[10, 'Longitude'] = -49.11
 
 # Corrige a posição de Balsa Nova
-dados['Latitude'][15] = -25.49
-dados['Longitude'][15] = -49.49
+dados.at[15, 'Latitude'] = -25.49
+dados.at[15, 'Longitude'] = -49.49
 
 # Corrige a posição de Lapa
-dados['Latitude'][16] = -25.57
-dados['Longitude'][16] = -49.49
+dados.at[16, 'Latitude'] = -25.57
+dados.at[16, 'Longitude'] = -49.49
 
 # Corrige a posição de Borda do Campo
-dados['Latitude'][20] = -25.41
-dados['Longitude'][20] = -49.08
+dados.at[20, 'Latitude'] = -25.41
+dados.at[20, 'Longitude'] = -49.08
 
-if(len(dados) > 22):
+if len(dados) > 22:
     # Corrige a posição de Vista Alegre
-    dados['Latitude'][22] = -25.40
-    dados['Longitude'][22] = -49.31
+    dados.at[22, 'Latitude'] = -25.40
+    dados.at[22, 'Longitude'] = -49.31
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
