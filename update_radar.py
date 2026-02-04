@@ -14,7 +14,7 @@ import matplotlib.colors as mcolors
 
 # Definições do mapa
 LAT_CENTRO, LON_CENTRO = -25.426, -49.304  # Estação Parque Barigui
-ZOOM = 8  # Define o zoom do radar e do mapa
+ZOOM = 7  # Define o zoom do radar e do mapa
 SIZE = 512  # Resolução do radar
 COLOR_SCHEME = 4  # Paleta de cores do radar
 OPTIONS = "1_1"  # Remove fundo preto do radar
@@ -145,12 +145,12 @@ scale_end = geodesic(kilometers=20).destination(scale_start, 90)  # 90° = dire�
 ax.plot([scale_start[1], scale_end.longitude], [scale_start[0], scale_end.latitude],
         color='black', linewidth=3, transform=ccrs.PlateCarree())
 
-ax.text((scale_start[1] + scale_end.longitude) / 2, scale_start[0] - 0.03,
-        "20 km", fontsize=10, color='black', ha='center', transform=ccrs.PlateCarree())
+ax.text((scale_start[1] + scale_end.longitude) / 2, scale_start[0] - 0.08,
+        "20 km", fontsize=14, color='black', ha='center', transform=ccrs.PlateCarree())
 
 # Adicionar horário no canto inferior direito
-ax.text(LON_CENTRO+delta_lon*0.8, LAT_CENTRO-delta_lat*0.85, timestamp_brasilia, fontsize=10, color='black', ha='right')
-ax.text(LON_CENTRO+delta_lon*0.8, LAT_CENTRO-delta_lat*0.91, "Fonte: RainViewer", fontsize=10, color='black', ha='right')
+ax.text(LON_CENTRO+delta_lon*0.8, LAT_CENTRO-delta_lat*0.85, timestamp_brasilia, fontsize=14, color='black', ha='right')
+ax.text(LON_CENTRO+delta_lon*0.8, LAT_CENTRO-delta_lat*0.91, "Fonte: RainViewer", fontsize=14, color='black', ha='right')
 #ax.scatter(LON_CENTRO, LAT_CENTRO, color='blue', s=70, transform=ccrs.PlateCarree(), label=nome)
 #ax.text(LON_CENTRO, LAT_CENTRO - 0.04, "Barigui", fontsize=12, color='black', transform=ccrs.PlateCarree(), ha='center')
 
