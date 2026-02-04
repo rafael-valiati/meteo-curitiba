@@ -42,8 +42,8 @@ delta_lat, delta_lon = grau_extensao, grau_extensao
 # Definição da paleta de cores da chuva usada pelo RainViewer
 rain_colors = [
     (0, "white"),         # Sem precipitação
-    (0.1, "lightgreen"),  # Chuva fraca
-    (0.3, "green"),       # Chuva moderada
+    (0.1, "lightblue"),   # Chuva fraca
+    (0.3, "blue"),        # Chuva moderada
     (0.5, "yellow"),      # Chuva forte
     (0.7, "orange"),      # Chuva muito forte
     (0.9, "red"),         # Tempestade
