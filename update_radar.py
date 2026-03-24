@@ -57,6 +57,7 @@ data = response.json()
 
 if "radar" in data and "past" in data["radar"]:
     latest_timestamp = data["radar"]["past"][-1]["time"]
+    path = data["radar"]["past"][-1]["path"]
 else:
     raise ValueError("Não foi possível obter o timestamp mais recente.")
 
@@ -66,7 +67,7 @@ brt_time = utc_time.replace(tzinfo=pytz.utc).astimezone(pytz.timezone("America/S
 timestamp_brasilia = brt_time.strftime("%d/%b/%Y - %H:%M")
 
 # Constrói a URL da imagem de radar
-radar_image_url = f"https://tilecache.rainviewer.com/v2/radar/{latest_timestamp}/{SIZE}/{ZOOM}/{LAT_CENTRO}/{LON_CENTRO}/{COLOR_SCHEME}/{OPTIONS}.png"
+radar_image_url = f"https://tilecache.rainviewer.com{path}/{SIZE}/{ZOOM}/{LAT_CENTRO}/{LON_CENTRO}/{COLOR_SCHEME}/{OPTIONS}.png"
 
 # Baixa a imagem de radar
 response = requests.get(radar_image_url)
@@ -149,8 +150,8 @@ ax.text((scale_start[1] + scale_end.longitude) / 2, scale_start[0] - 0.08,
         "20 km", fontsize=14, color='black', ha='center', transform=ccrs.PlateCarree())
 
 # Adicionar horário no canto inferior direito
-ax.text(LON_CENTRO+delta_lon*0.8, LAT_CENTRO-delta_lat*0.85, timestamp_brasilia, fontsize=14, color='black', ha='right')
-ax.text(LON_CENTRO+delta_lon*0.8, LAT_CENTRO-delta_lat*0.91, "Fonte: RainViewer", fontsize=14, color='black', ha='right')
+ax.text(LON_CENTRO+delta_lon*0.8, LAT_CENTRO+delta_lat*0.91, timestamp_brasilia, fontsize=14, color='black', ha='right')
+ax.text(LON_CENTRO+delta_lon*0.8, LAT_CENTRO+delta_lat*0.83, "Fonte: RainViewer", fontsize=14, color='black', ha='right')
 #ax.scatter(LON_CENTRO, LAT_CENTRO, color='blue', s=70, transform=ccrs.PlateCarree(), label=nome)
 #ax.text(LON_CENTRO, LAT_CENTRO - 0.04, "Barigui", fontsize=12, color='black', transform=ccrs.PlateCarree(), ha='center')
 
