@@ -184,7 +184,7 @@ for idx, row in gdf.iterrows():
         elif idx in [22]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"SJP Boneca", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [23]:
-            ax.text(row.geometry.x, row.geometry.y + 1500, f"Barreirinha", color='black', va='center', ha='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y - 1500, f"Barreirinha", color='black', va='center', ha='center', fontsize=8, weight='bold')
         if(len(gdf) > 24):
             if idx in [24]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Uberaba", color='black', va='center', ha='center', fontsize=8, weight='bold')
