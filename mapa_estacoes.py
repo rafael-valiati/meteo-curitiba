@@ -144,7 +144,7 @@ for idx, row in gdf.iterrows():
         elif idx in [2]:
             ax.text(row.geometry.x + 250, row.geometry.y + 1500, f"Bateias", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [3]:
-            ax.text(row.geometry.x, row.geometry.y + 1500, f"Orleans", color='black', va='center', ha='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y - 1500, f"Capão Raso", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [4]:
             ax.text(row.geometry.x, row.geometry.y - 1500, f"S J Pinhais", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [5]:
@@ -202,6 +202,8 @@ for idx, row in gdf.iterrows():
                 ax.text(row.geometry.x, row.geometry.y - 1500, f"Água Verde", color='black', va='center', ha='center', fontsize=8, weight='bold')
             elif idx in [31]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Colombo Centro", color='black', va='center', ha='center', fontsize=8, weight='bold')
+            elif idx in [32]:
+                ax.text(row.geometry.x, row.geometry.y + 1500, f"Orleans", color='black', va='center', ha='center', fontsize=8, weight='bold')
         if (32 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 8):
             ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=10, weight='bold')
         else:
