@@ -55,7 +55,7 @@ hora_num = datetime.now(brasilia_tz).hour
 
 # Pega dados das estações suspeitas só se for à noite.
 if 5 <= hora_num <= 19:
-    for station in stations[:24]:
+    for station in stations[:20]:
         temp, lat, lon = get_station_temperature(station)
         estacoes.append(station)
         temperatures.append(temp if temp is not None else np.nan)  # Aceitar np.nan
@@ -83,21 +83,21 @@ dados.at[10, 'Latitude'] = -25.27
 dados.at[10, 'Longitude'] = -49.11
 
 # Corrige a posição de Balsa Nova
-dados.at[15, 'Latitude'] = -25.49
-dados.at[15, 'Longitude'] = -49.49
+dados.at[13, 'Latitude'] = -25.49
+dados.at[13, 'Longitude'] = -49.49
 
 # Corrige a posição de Lapa
-dados.at[16, 'Latitude'] = -25.57
-dados.at[16, 'Longitude'] = -49.49
+dados.at[14, 'Latitude'] = -25.57
+dados.at[14, 'Longitude'] = -49.49
 
 # Corrige a posição de Borda do Campo
-dados.at[20, 'Latitude'] = -25.41
-dados.at[20, 'Longitude'] = -49.08
+dados.at[16, 'Latitude'] = -25.41
+dados.at[16, 'Longitude'] = -49.08
 
-if len(dados) > 24:
+if len(dados) > 20:
     # Corrige a posição de Vista Alegre
-    dados.at[25, 'Latitude'] = -25.40
-    dados.at[25, 'Longitude'] = -49.31
+    dados.at[21, 'Latitude'] = -25.40
+    dados.at[21, 'Longitude'] = -49.31
 
 # Definir o colormap baseado na temperatura
 c1 = plt.cm.Purples(np.linspace(0, 1, 50))
@@ -146,7 +146,7 @@ for idx, row in gdf.iterrows():
         elif idx in [3]:
             ax.text(row.geometry.x, row.geometry.y - 1500, f"Capão Raso", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [4]:
-            ax.text(row.geometry.x, row.geometry.y - 1500, f"S J Pinhais", color='black', va='center', ha='center', fontsize=8, weight='bold')
+            ax.text(row.geometry.x, row.geometry.y - 1500, f"SJP Centro", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [5]:
             ax.text(row.geometry.x, row.geometry.y - 1500, f"Boa Vista", color='black', va='center', ha='center', fontsize=8, weight='bold')
         elif idx in [6]:
@@ -160,49 +160,41 @@ for idx, row in gdf.iterrows():
         elif idx in [10]:
             ax.text(row.geometry.x - 500, row.geometry.y - 1500, f"↑ Bocaiúva do Sul", color='black', va='center', ha='center',fontsize=10, weight='bold')
         elif idx in [11]:
-            ax.text(row.geometry.x, row.geometry.y - 1500, f"Novo Mundo", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [12]:
-            ax.text(row.geometry.x, row.geometry.y - 1500, f"Campo Magro", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [13]:
             ax.text(row.geometry.x, row.geometry.y - 1500, f"Colombo", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [14]:
+        elif idx in [12]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Mercês", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [15]:
+        elif idx in [13]:
             ax.text(row.geometry.x + 1000, row.geometry.y + 1500, f"← Balsa Nova", color='black', va='center', ha='center', fontsize=10, weight='bold')
-        elif idx in [16]:
+        elif idx in [14]:
             ax.text(row.geometry.x + 3000, row.geometry.y, f"↓ Lapa", color='black', va='center', ha='center', fontsize=10, weight='bold')
-        elif idx in [17]:
+        elif idx in [15]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Piraquara", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [18]:
-            ax.text(row.geometry.x, row.geometry.y + 1500, f"Canguiri", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [19]:
-            ax.text(row.geometry.x, row.geometry.y + 1500, f"Q. Barras", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [20]:
+        elif idx in [16]:
             ax.text(row.geometry.x, row.geometry.y - 1500, f"B. Campo →", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [21]:
+        elif idx in [17]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"Alphaville", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [22]:
+        elif idx in [18]:
             ax.text(row.geometry.x, row.geometry.y + 1500, f"SJP Boneca", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        elif idx in [23]:
+        elif idx in [19]:
             ax.text(row.geometry.x, row.geometry.y - 1500, f"Barreirinha", color='black', va='center', ha='center', fontsize=8, weight='bold')
-        if(len(gdf) > 24):
-            if idx in [24]:
+        if(len(gdf) > 20):
+            if idx in [20]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Uberaba", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [25]:
+            elif idx in [21]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Vista Alegre", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [26]:
+            elif idx in [22]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"S Inácio", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [27]:
+            elif idx in [23]:
                 ax.text(row.geometry.x + 500, row.geometry.y - 1500, f"Bigorrilho", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [28]:
+            elif idx in [24]:
                 ax.text(row.geometry.x - 1000, row.geometry.y + 1500, f"Pilarzinho", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [29]:
+            elif idx in [25]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"S Lourenço", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [30]:
+            elif idx in [26]:
                 ax.text(row.geometry.x, row.geometry.y - 1500, f"Água Verde", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [31]:
+            elif idx in [27]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Colombo Centro", color='black', va='center', ha='center', fontsize=8, weight='bold')
-            elif idx in [32]:
+            elif idx in [28]:
                 ax.text(row.geometry.x, row.geometry.y + 1500, f"Orleans", color='black', va='center', ha='center', fontsize=8, weight='bold')
         if (32 <= row['Temperatura'] < 40) or (-5 < row['Temperatura'] <= 8):
             ax.text(row.geometry.x, row.geometry.y, f'{row["Temperatura"]:.1f}', color='white', ha='center', va='center', fontsize=10, weight='bold')
